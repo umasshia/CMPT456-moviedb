@@ -44,7 +44,7 @@ const MovieInfo = () => {
           (vid) => vid.name === "Official Trailer"
         );
         axios.get(
-          `http://www.omdbapi.com/?apikey=${omdbKey}&i=${id}`
+          `https://www.omdbapi.com/?apikey=${omdbKey}&i=${id}`
           ).then((response) => {
             setOmdbData(response.data);
             if(response.data.Ratings[1]){
