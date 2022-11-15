@@ -6,7 +6,7 @@ Users are also able to register and add films to a watchlist.
 
 Currently users are not able to remove a film from the watchlist from the movie info page. 
 
-CINEFLIX was utilized so I could learn and implement my own functionalities into the project.
+CINEFLIX was utilized app so I could learn and implement my own functionalities into the project, although its functionalities and code was heavily modified.
 
 TMDB and OMDB APIs are utilized.
 
