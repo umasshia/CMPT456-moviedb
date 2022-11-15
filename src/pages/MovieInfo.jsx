@@ -11,6 +11,7 @@ import { arrayUnion,doc,updateDoc,getDoc,onSnapshot } from "firebase/firestore";
 
 
 const MovieInfo = () => {
+  
   const params = useParams();
   const key = process.env.REACT_APP_TMDB_API_KEY;
   const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
