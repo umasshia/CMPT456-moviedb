@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-black flex item-center justify-between p-4 z-[100] w-full block">
+    <div className="bg-black flex item-center justify-between p-4 z-100 w-full block">
       <Link to="/">
         <h1 className="text-red-600 text-4xl font-bold cursor-pointer">
           Movie Database
@@ -25,7 +25,7 @@ const Navbar = () => {
       {user?.email ? (
         <div>
           <Link to="/account">
-            <button className="text-[#FFFDE3] pr-4">Watchlist</button>
+            <button className="text-[#FFFDE3] px-6 py-2 rounded-2xl cursor-pointer bg-red-600  mr-3">Watchlist</button>
           </Link>
           <button
             onClick={handleLogOut}
@@ -37,10 +37,10 @@ const Navbar = () => {
       ) : (
         <div>
           <Link to="/logIn">
-            <button className="text-[#FFFDE3] pr-4">Log In</button>
+            <button className="text-[#FFFDE3] px-6 py-2 rounded-2xl cursor-pointer bg-red-600  mr-3">Log In</button>
           </Link>
           <Link to="/register">
-            <button className="text-[#FFFDE3] px-6 py-2 rounded-2xl cursor-pointer bg-red-600 ">
+            <button className="text-[#FFFDE3] px-6 py-2 rounded-2xl cursor-pointer bg-red-600">
               Register
             </button>
           </Link>

@@ -44,11 +44,11 @@ const List = ({ fetchURL }) => {
 
 
   return (
-    <div className="h-70vhtop-20">
+    <div className="h-70vh top-20">
       <div className="items-center pt-10 ">
       </div>
       <div className="relative flex items-center ml-2 group">
-        <div className='w-full h-full scroll-smooth scrollbar-hide relative break-words ml-12'>
+        <div className='w-full h-full relative ml-12'>
           {movies.map((item) => {
             return (
               <Movie key={item.id} item={item} ></Movie>
@@ -61,29 +61,29 @@ const List = ({ fetchURL }) => {
           {page <= 2 ? (
             <div></div>
           ) : (
-          <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded mb-5 mr-2 ml-2" onClick={loadLessTwo} disabled={page<2 ? true: false}>
+          <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-2xl mb-5 mr-2 ml-2" onClick={loadLessTwo} disabled={page<2 ? true: false}>
             &lt;&lt; 
           </button>
           )}
           {page === 1 ? (
             <div></div>
           ) : (
-          <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded mb-5 ml-2 mr-2" onClick={loadLess} disabled={page<2 ? true: false}>
+          <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-2xl mb-5 ml-2 mr-2" onClick={loadLess} disabled={page<2 ? true: false}>
             {page-1}
           </button>
           )}
-          <button className="bg-red-800 hover:bg-red-800 text-white font-bold py-2 px-4 rounded mb-5 mr-2 ml-2" disabled={true}>
+          <button className="bg-red-800 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-2xl mb-5 mr-2 ml-2" disabled={true}>
             {page}
           </button>
           {page < 15 ? (
-            <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded mb-5 ml-2 mr-2" onClick={loadMore} disabled={page>15 ? true: false}>
+            <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-2xl mb-5 ml-2 mr-2" onClick={loadMore} disabled={page>15 ? true: false}>
               {page+1}
             </button>
             ) : (
             <div></div>
           )}
           {page < 14 ? (
-            <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded mb-5 ml-2 mr-2" onClick={loadMoreTwo} disabled={page>15 ? true: false}>
+            <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-2xl mb-5 ml-2 mr-2" onClick={loadMoreTwo} disabled={page>15 ? true: false}>
               &gt;&gt; 
             </button>
           ) : (

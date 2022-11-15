@@ -9,11 +9,11 @@ const Movie = (props) => {
   }
 
   return (
-    <div className="w-[180px] sm:w-[250px] md:w-[320px] lg:w-[320px] xl:w-[280px]  inline-block cursor-pointer relative p-4 z-0">
+    <div className="w-[180px] sm:w-[250px] md:w-[320px] lg:w-[320px] xl:w-[280px]  inline-block cursor-pointer relative p-4 z-0 ">
     { props.item.poster_path === null ? (
       <div>
       <img
-        className="w-full h-auto hover:opacity-50 rounded"
+        className="w-full h-auto hover:opacity-50 rounded-xl"
         src={require("../img/placeholder.jpg")}
         alt=""
         onClick={handleClick}
@@ -26,9 +26,9 @@ const Movie = (props) => {
       </div>
     </div>
     ) : (
-    <div>
+    <div className="rounded-2xl">
       <img
-        className="w-full h-auto hover:opacity-50 rounded"
+        className="w-full h-auto hover:opacity-50 rounded-2xl "
         src={`https://image.tmdb.org/t/p/w500${props.item?.poster_path}`}
         onClick={handleClick}
         alt=""
