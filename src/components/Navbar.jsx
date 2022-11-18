@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-black flex item-center justify-between p-4 z-100 w-full block">
+    <div className="bg-black flex item-center justify-between p-4 z-100 w-11/12 m-auto block">
       <Link to="/">
         <h1 className="text-red-600 text-4xl font-bold cursor-pointer">
           Movie Database
@@ -25,7 +25,7 @@ const Navbar = () => {
       {user?.email ? (
         <div>
           <Link to="/account">
-            <button className="text-[#FFFDE3] px-6 py-2   cursor-pointer bg-red-600 hover:bg-red-800 mr-3">Watchlist</button>
+            <button className="text-[#FFFDE3] px-6 py-2  cursor-pointer bg-red-600 hover:bg-red-800 mr-3">Watchlist</button>
           </Link>
           <button
             onClick={handleLogOut}

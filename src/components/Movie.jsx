@@ -19,8 +19,7 @@ const Movie = (props) => {
         onClick={handleClick}
       />
       <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/70 opacity-0 hover:opacity-100 text-white px-5">
-       
-        <div className="block justify-center items-center absolute top-8 right-8 ">
+        <div className="flex w-11/12 overflow-y m-auto absolute pl-5 pt-5">
           <p className="text-xs font-bold">{props.item?.title} </p>
         </div>
       </div>
@@ -34,7 +33,6 @@ const Movie = (props) => {
         alt=""
       />
       <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/70 opacity-0 hover:opacity-100 text-white px-5">
-       
         <div className="block justify-center items-center absolute top-8 right-8 ">
           <p className="text-xs font-bold">{props.item?.title} </p>
         </div>

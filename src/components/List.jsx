@@ -8,6 +8,7 @@ const List = ({ fetchURL }) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
+    console.log(fetchURL + page)
     axios.get(fetchURL + page)
     .then((response) => {
         setMovies(response.data.results);
@@ -21,7 +22,7 @@ const List = ({ fetchURL }) => {
   return (
     <div className="h-70vh">
       <div className="flex justify-center w-7/10 mt-5">
-        <div className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8'>
+        <div className='grid grid-cols-3 gap-y-4 gap-x-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
           {movies.map((item) => {
             return (
               <Movie key={item.id} item={item} ></Movie>

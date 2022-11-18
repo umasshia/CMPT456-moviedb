@@ -51,8 +51,8 @@ const MovieInfo = () => {
     `https://www.omdbapi.com/?apikey=${omdbKey}&i=${omdbId}`
     ).then((response) => {
       setOmdbData(response.data);
-      let tomato = response.data.Ratings;
-      setTomatoScore(tomato[0].Value)
+      let tomato = response.data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
+      setTomatoScore(tomato.Value)
     }).catch((error) => {
         console.log(error);
     });
@@ -69,15 +69,10 @@ const MovieInfo = () => {
     });
   }, [movieId, user?.email,tmdbData.id,tomatoScore]);
 
-  const imd = parseFloat(omdbData.imdbRating);
-  const meta = parseFloat(omdbData.Metascore)/10;
-  const tmt = parseFloat(tomatoScore)/10;
-  const avg = (imd + meta + tmt) / 3;
-
   const deleteMovie = async() => {
       try{
         // eslint-disable-next-line
-        const result = saved.filter((item)=> item.id != params.movieId)
+        const result = saved.filter((item)=> item.id != movieId)
         await updateDoc(movieID,{
           savedMovies: result
         })
@@ -174,22 +169,34 @@ const MovieInfo = () => {
             <div className="flex flex-row items-center ">
             <div className="text-base mb-2">	
                 Ratings:	
-                <p className="text-base">	
-                  IMDB:&nbsp;	
-                  {imd}{" "}
-                </p>	
-                <p className=" text-base">	
-                  Rotten Tomatoes:&nbsp;	
-                  {tmt}{" "}
-                </p>	
-                <p className="text-base">	
-                  Metacritic:&nbsp; 
-                  {meta}{" "}	
-                </p>	
-                <p className="text-base">	
-                  Average:&nbsp;	
-                  {avg.toFixed(1) ? avg.toFixed(1) : "N/A"}{" "}
-               </p>
+                <br />
+                <div className="text-base">	
+                  <img 
+                  className="inline-block w-7 h-7"
+                  src={require("../img/imdb-icon.png")} 
+                  alt='' 
+                  />
+                  &nbsp;	
+                  {omdbData.imdbRating}{" "}
+                </div>	
+                <div className=" text-base">
+                  <img 
+                  className="inline-block w-7 h-7"
+                  src={require("../img/tomato.png")} 
+                  alt='' 
+                  />
+                  &nbsp;	
+                  {tomatoScore}{" "}
+                </div>	
+                <div className="text-base">	
+                  <img 
+                  className="inline-block w-7 h-7"
+                  src={require("../img/metascore.png")} 
+                  alt='' 
+                  />
+                  &nbsp; 
+                  {omdbData.Metascore}{" "}	
+                </div>	
               </div>
               <div className="">
                 <div className="">
