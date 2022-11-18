@@ -74,7 +74,7 @@ const Genre = ({ handleGenreChange }) => {
 	]
 
 	return (
-		<div className="w-4/5 m-auto">
+		<div className="w-4/5 m-auto mt-5">
 			<div className ="flex overflow-scroll scrollbar-hide">
 				{genres.map((genre, index) => (
 				<div key={index} 
