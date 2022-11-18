@@ -8,3 +8,9 @@ body {
   background: linear-gradient(to top, #252627, #1a1b1c); 
 }
 
+h1 {
+  color: transparent;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #e0e0e0;
+}
+
