@@ -9,7 +9,7 @@ const Movie = (props) => {
   }
 
   return (
-    <div className="w-[180px] sm:w-[250px] md:w-[300px] lg:w-[310px] inline-block cursor-pointer relative p-4 z-0 ">
+    <div className="w-[160px] sm:w-[220px] md:w-[270px] lg:w-[270px] inline-block cursor-pointer relative z-0 ">
     { props.item.poster_path === null ? (
       <div>
       <img
@@ -18,9 +18,9 @@ const Movie = (props) => {
         alt=""
         onClick={handleClick}
       />
-      <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/70 opacity-0 hover:opacity-100 text-white px-5">
-        <div className="flex w-11/12 overflow-y m-auto absolute pl-5 pt-5">
-          <p className="text-xs font-bold">{props.item?.title} </p>
+      <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/50 opacity-0 hover:opacity-100 text-white px-5 text-right">
+        <div className="flex w-11/12 overflow-y m-auto absolute self-right top-4 ">
+          <p className="text-s font-bold">{props.item?.title} </p>
         </div>
       </div>
     </div>
@@ -33,8 +33,8 @@ const Movie = (props) => {
         alt=""
       />
       <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/70 opacity-0 hover:opacity-100 text-white px-5">
-        <div className="block justify-center items-center absolute top-8 right-8 ">
-          <p className="text-xs font-bold">{props.item?.title} </p>
+        <div className="flex w-11/12 overflow-y m-auto absolute self-right top-4 ">
+          <p className="text-s font-bold">{props.item?.title} </p>
         </div>
       </div>
     </div>

@@ -37,10 +37,8 @@ const Register = () => {
   return (
     <div>
       <div className="w-full h-screen">
-        
-        <div className="bg-black/60 fixed top-0 left-0 w-full h-screen"></div>
         <div className="fixed w-full px-4 py-24 z-50">
-          <div className="max-w-[450px] h-[600px] mx-auto bg-black/75 text-white">
+          <div className="max-w-[450px] h-[600px] mx-auto text-white">
             <div className="max-w-[320px] mx-auto py-16">
               <h1 className="text-3xl font-bold">Register</h1>
               <form
@@ -74,7 +72,7 @@ const Register = () => {
                   minLength="6"
                   onChange={e => setConfirmPassword(e.target.value)}
                 />
-                <button type="submit" className="bg-red-600 py-3 my-6 rounded font-bold">
+                <button type="submit" className="bg-red-700 py-3 my-6 rounded font-bold">
                   Register
                 </button>
                 <div className="flex justify-between items-center text-sm text-gray-600">

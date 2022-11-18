@@ -22,7 +22,7 @@ const List = ({ fetchURL }) => {
   return (
     <div className="h-70vh">
       <div className="flex justify-center w-7/10 mt-5">
-        <div className='grid grid-cols-3 gap-y-4 gap-x-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+        <div className='grid grid-cols-3 gap-y-7 gap-x-7 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
           {movies.map((item) => {
             return (
               <Movie key={item.id} item={item} ></Movie>

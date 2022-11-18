@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body {
-    background-color: black;
-    font-style: Verdana, sans-serif;
-  }
+  font-style: Verdana, sans-serif;
+  background: #141515;  
+  background: linear-gradient(to top, #252627, #1a1b1c); 
+}
 
