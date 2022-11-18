@@ -73,8 +73,7 @@ const MovieInfo = () => {
 
   const deleteMovie = async() => {
       try{
-        // eslint-disable-next-line
-        const result = saved.filter((item)=> item.id != movieId)
+        const result = saved.filter((item)=> item.id !== movieId)
         await updateDoc(movieID,{
           savedMovies: result
         })

@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import { AuthContextProvider } from "./context/AuthContext";
-import { useParams } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -11,10 +10,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import MovieInfo from "./pages/MovieInfo";
 
 function App() {
-
-  const params = useParams();
-  console.log(params)
-
   return (
     <div >
       <AuthContextProvider>
@@ -22,7 +17,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/logIn" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
-            <Route path="/:genre/:movieId" element={<MovieInfo />}></Route>
+            <Route path="/:movieId" element={<MovieInfo />}></Route>
           <Route
             path="/account"
             element={

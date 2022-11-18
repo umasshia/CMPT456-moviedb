@@ -5,7 +5,7 @@ const Movie = (props) => {
   const navigate= useNavigate();
 
   const handleClick=()=>{
-    navigate(`/${props.genre}/${props.item.id}`)
+    navigate(`/${props.item.id}`)
   }
 
   return (
