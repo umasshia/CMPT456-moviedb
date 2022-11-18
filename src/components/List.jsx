@@ -8,47 +8,20 @@ const List = ({ fetchURL }) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    fetchData(page)
-    // eslint-disable-next-line
-  }, [page]);
-
-  const fetchData = async (pgNum) => {
-    await axios.get(fetchURL + pgNum)
+    axios.get(fetchURL + page)
     .then((response) => {
         setMovies(response.data.results);
       })
     .catch((error) => {
       console.log(error);
     });
-  }
-
-  const loadLess = () => {
-    setPage((prevState) => prevState - 1)
-    console.log(page);
-  }
-
-  const loadMore = () => {
-    setPage((prevState) => prevState + 1)
-    console.log(page);
-  }
-
-  const loadLessTwo = () => {
-    setPage((prevState) => prevState - 2)
-    console.log(page);
-  }
-
-  const loadMoreTwo = () => {
-    setPage((prevState) => prevState + 2)
-    console.log(page);
-  }
+  }, [page, fetchURL]);
 
 
   return (
-    <div className="h-70vh top-20">
-      <div className="items-center pt-10 ">
-      </div>
-      <div className="relative flex items-center ml-2 group">
-        <div className='w-full h-full relative ml-12'>
+    <div className="h-70vh">
+      <div className="flex justify-center w-7/10 mt-5">
+        <div className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8'>
           {movies.map((item) => {
             return (
               <Movie key={item.id} item={item} ></Movie>
@@ -61,29 +34,29 @@ const List = ({ fetchURL }) => {
           {page <= 2 ? (
             <div></div>
           ) : (
-          <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-2xl mb-5 mr-2 ml-2" onClick={loadLessTwo} disabled={page<2 ? true: false}>
+          <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4   mb-5 mr-2 ml-2" onClick={() => setPage(page - 2)} disabled={page<2 ? true: false}>
             &lt;&lt; 
           </button>
           )}
           {page === 1 ? (
             <div></div>
           ) : (
-          <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-2xl mb-5 ml-2 mr-2" onClick={loadLess} disabled={page<2 ? true: false}>
+          <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page - 1)} disabled={page<2 ? true: false}>
             {page-1}
           </button>
           )}
-          <button className="bg-red-800 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-2xl mb-5 mr-2 ml-2" disabled={true}>
+          <button className="bg-red-800 hover:bg-red-800 text-white font-bold py-2 px-4   mb-5 mr-2 ml-2" disabled={true}>
             {page}
           </button>
           {page < 15 ? (
-            <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-2xl mb-5 ml-2 mr-2" onClick={loadMore} disabled={page>15 ? true: false}>
+            <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page + 1)} disabled={page>15 ? true: false}>
               {page+1}
             </button>
             ) : (
             <div></div>
           )}
           {page < 14 ? (
-            <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-2xl mb-5 ml-2 mr-2" onClick={loadMoreTwo} disabled={page>15 ? true: false}>
+            <button className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page + 2)} disabled={page>15 ? true: false}>
               &gt;&gt; 
             </button>
           ) : (

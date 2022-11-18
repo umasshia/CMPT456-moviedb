@@ -7,7 +7,7 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
-import { arrayUnion,doc,updateDoc,getDoc,onSnapshot } from "firebase/firestore"; 
+import { arrayUnion,doc,updateDoc,onSnapshot } from "firebase/firestore"; 
 
 
 const MovieInfo = () => {
@@ -16,9 +16,12 @@ const MovieInfo = () => {
   const key = process.env.REACT_APP_TMDB_API_KEY;
   const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
 
+  const movieId = params.movieId;
+
+  const [omdbId, setOmdbId] = useState('');
   const [omdbData, setOmdbData] = useState([]);
-  const [movieData, setMovieData] = useState([]);
-  const [tomatoScore, setScore] = useState([]);
+  const [tmdbData, setTmdbData] = useState([]);
+  const [tomatoScore, setTomatoScore] = useState(['', 45]);
   const [trailer, setTrailer] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [saved, setSaved] = useState([]);
@@ -28,64 +31,53 @@ const MovieInfo = () => {
   const movieID = doc(db, 'users', `${user?.email}`);
 
   useEffect(() => {
-    fetchData();
+    axios.get(
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&append_to_response=videos`
+    ).then((response) => {
+      setTmdbData(response.data);
+      let omId = response.data.imdb_id;
+      setOmdbId(omId);
+      const trailerid = response.data.videos.results.find(
+        (vid) => vid.name === "Official Trailer"
+      );
+      setTrailer(trailerid ? trailerid : response.data.videos.results[0]);
+    }).catch((error) => {
+      console.log(error);
+    })
+  }, [omdbId,key,omdbKey,movieId]);
+
+  useEffect(() => {
+    axios.get(
+    `https://www.omdbapi.com/?apikey=${omdbKey}&i=${omdbId}`
+    ).then((response) => {
+      setOmdbData(response.data);
+      let tomato = response.data.Ratings;
+      setTomatoScore(tomato[0].Value)
+    }).catch((error) => {
+        console.log(error);
+    });
+  }, [omdbId, omdbKey, movieId, tomatoScore]);
+
+  useEffect(() => {
     onSnapshot(doc(db,'users',`${user?.email}`),(doc)=>{
       setSaved(doc.data()?.savedMovies)
-    })
-    // eslint-disable-next-line
-  }, []);
-
-  const fetchData = async () => {
-    axios.get(
-        `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=${key}&append_to_response=videos`
-      ).then((response) => {
-        setMovieData(response.data);
-        let id = response.data.imdb_id;
-        const trailerid = response.data.videos.results.find(
-          (vid) => vid.name === "Official Trailer"
-        );
-        axios.get(
-          `https://www.omdbapi.com/?apikey=${omdbKey}&i=${id}`
-          ).then((response) => {
-            setOmdbData(response.data);
-            if(response.data.Ratings[1]){
-              setScore(response.data.Ratings[1]);
-            }
-            else{             
-            setScore({Source: 'N/A', Value: 'N/A'});
-            }
-          }).catch((error) => {
-              console.log(error);
-          });
-        setTrailer(trailerid ? trailerid : response.data.videos.results[0]);
-      }).catch((error) => {
-        console.log(error);
-      })
-      let svd = await getDoc(movieID);
-      console.log(svd.data().savedMovies)
-      for(var i = 0; i < svd.data().savedMovies.length; i++){
-        // eslint-disable-next-line
-        if(svd.data().savedMovies[i].id == params.movieId){
+      for(var i = 0; i < doc.data()?.savedMovies.length; i++){
+        if(doc.data()?.savedMovies[i].id === tmdbData.id){
           setLike(true) 
         }
-      };
+      }
+    });
+  }, [movieId, user?.email,tmdbData.id,tomatoScore]);
 
-  };
-
-  console.log(movieData);
-  console.log(omdbData);
-  console.log(tomatoScore);
-
-  let imd = parseFloat(omdbData.imdbRating);
-  let meta = parseFloat(omdbData.Metascore)/10;
-  let tmt = parseFloat(tomatoScore.Value)/10;
-  let avg = (imd + meta + tmt) / 3;
+  const imd = parseFloat(omdbData.imdbRating);
+  const meta = parseFloat(omdbData.Metascore)/10;
+  const tmt = parseFloat(tomatoScore)/10;
+  const avg = (imd + meta + tmt) / 3;
 
   const deleteMovie = async() => {
       try{
         // eslint-disable-next-line
         const result = saved.filter((item)=> item.id != params.movieId)
-        console.log(result)
         await updateDoc(movieID,{
           savedMovies: result
         })
@@ -98,12 +90,12 @@ const MovieInfo = () => {
   const saveMovie = async() => {
     if (user?.email){
       if(like === false){
-        setLike(true)
+        setLike(!like)
         updateDoc(movieID,{
           savedMovies:arrayUnion({
-            id: movieData.id,
-            title: movieData.title,
-            img:movieData.poster_path
+            id: tmdbData.id,
+            title: tmdbData.title,
+            img:tmdbData.poster_path
           })
         })
       }
@@ -161,7 +153,7 @@ const MovieInfo = () => {
       <div className="flex justify-center ">
         <div className="flex flex-col items-center md:flex-row md:max-w-2xl lg:max-w-3xl absolute xl:max-w-4xl md:mt-[-300px] mt-[-200px] text-white ">
           <div className=" lg:w-[30%] h-auto md:h-[400px] w-[70%] overflow-hidden">
-            { movieData.poster_path === null ? (
+            { tmdbData.poster_path === null ? (
               <img
                 className="w-[100%] h-full md:h-auto object-cover rounded-md"
                 src={require("../img/placeholder.jpg")}
@@ -170,14 +162,14 @@ const MovieInfo = () => {
             ) : (
               <img
                 className="w-[100%] h-full md:h-auto object-cover rounded-md"
-                src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w500${tmdbData.poster_path}`}
                 alt=""
               />
             )}
           </div>
           <div className="float-left w-[70%] md:pl-12 ">
             <p className="text-3xl md:text-5xl mb-3 mt-3 md:mt-0">
-              {movieData.title || movieData.original_title}{" "}
+              {tmdbData.title || tmdbData.original_title}{" "}
             </p>
             <div className="flex flex-row items-center ">
             <div className="text-base mb-2">	
@@ -202,17 +194,17 @@ const MovieInfo = () => {
               <div className="">
                 <div className="">
                 <p className="text-base md:text-base ml-20 mb-2">
-                    Released:&nbsp;  {movieData?.release_date}{" "}
+                    Released:&nbsp;  {tmdbData?.release_date}{" "}
                   </p>
                   <p className="text-sm md:text-base mb-2 ml-20">
-                    Runtime:&nbsp;  {movieData?.runtime} min
+                    Runtime:&nbsp;  {tmdbData?.runtime} min
                   </p>
                 </div>
 
                 <div className="rid grid-flow-col auto-cols-max gap-4 mb-3 ml-20">
                   Genres:&nbsp; 
-                  {movieData.genres &&
-                    movieData.genres.slice(0, 5).map((genre, i) => (
+                  {tmdbData.genres &&
+                    tmdbData.genres.slice(0, 5).map((genre, i) => (
                       <span key={i} className="text-sm  md:text-base">
                         {genre.name};&nbsp;
                       </span>
@@ -222,7 +214,7 @@ const MovieInfo = () => {
             </div>
 
             <p className="mb-8 mt-2">
-            {movieData.overview} 
+            {tmdbData.overview} 
             </p>
             <div className="flex flex-row items-center ">
               <button

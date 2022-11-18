@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import List from "../components/List"
-import SearchList from "../components/SearchList"
 import Search from "../components/Search"
 
 
@@ -24,7 +23,7 @@ const Home = () => {
       {/^(.{2,})$/.test(movieTitle) ? (
         <div> 
           <Search handleInput={handleInput} />
-          <SearchList fetchURL={requestSearch} />
+          <List fetchURL={requestSearch} />
         </div>
       ) : (
         <div> 

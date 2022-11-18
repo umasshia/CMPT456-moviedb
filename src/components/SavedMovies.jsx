@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
 import { updateDoc, doc, onSnapshot } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 
 const SavedMovies = () => {
     const [movies,setMovies] = useState([])
     const {user}= UserAuth();
+    const navigate = useNavigate();
 
     useEffect(()=>{
         onSnapshot(doc(db,'users',`${user?.email}`),(doc)=>{
@@ -31,7 +33,7 @@ const SavedMovies = () => {
       <div className= "mx-auto max-w-2xl py-10 px-2 sm:py-10 sm:px-6 lg:max-w-7xl">
         <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {movies.map((item) => (
-            <div key={item.id} className="inline-block cursor-pointer relative ">
+            <div key={item.id} className="inline-block cursor-pointer relative" onClick={() => navigate(`/${item.genre}/${item.id}`)}>
               <img
                 className="w-full h-auto block"
                 src={`https://image.tmdb.org/t/p/w500${item?.img}`}

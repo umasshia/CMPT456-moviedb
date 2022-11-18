@@ -53,7 +53,7 @@ const Login = () => {
                   minLength="6"
                   onChange={e => setPassword(e.target.value)}
                 />
-                <button className="bg-red-600 py-3 my-6 rounded-2xl font-bold">
+                <button className="bg-red-600 py-3 my-6   font-bold">
                   Log In
                 </button>
                 <div className="flex justify-between items-center text-sm text-gray-600">
