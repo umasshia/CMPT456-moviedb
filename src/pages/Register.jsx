@@ -40,13 +40,13 @@ const Register = () => {
         <div className="fixed w-full px-4 py-24 z-50">
           <div className="max-w-[450px] h-[600px] mx-auto text-white">
             <div className="max-w-[320px] mx-auto py-16">
-              <h1 className="text-3xl font-bold">Register</h1>
+              <h1 className="text-3xl text-gray-300">Register</h1>
               <form
                 onSubmit={handleSubmit}
                 className="w-full flex flex-col py-4"
               >
                 <input
-                  className="p-3 my-2 bg-gray-700 rouded"
+                  className="p-3 my-2 bg-inherit border border-gray-300"
                   type="email"
                   placeholder="Email"
                   autoComplete="email"
@@ -55,7 +55,7 @@ const Register = () => {
                 />
                 
                 <input
-                  className="p-3 my-2 bg-gray-700 rouded"
+                  className="p-3 my-2 bg-inherit border border-gray-300"
                   type="password"
                   placeholder="Password"
                   autoComplete="current-password"
@@ -64,7 +64,7 @@ const Register = () => {
                   onChange={e => setPassword(e.target.value)}
                 />
                 <input
-                  className="p-3 my-2 bg-gray-700 rouded"
+                  className="p-3 my-2 bg-inherit border border-gray-300"
                   type="password"
                   placeholder="Confirm Password"
                   autoComplete="current-password"
@@ -72,7 +72,7 @@ const Register = () => {
                   minLength="6"
                   onChange={e => setConfirmPassword(e.target.value)}
                 />
-                <button type="submit" className="border border-gray-300 hover:bg-gray-600 py-3 my-6 font-bold">
+                <button type="submit" className="border border-gray-300 hover:bg-gray-300 hover:text-[#141515] py-3 my-6 font-bold">
                   Register
                 </button>
                 <div className="flex justify-between items-center text-sm text-gray-600">

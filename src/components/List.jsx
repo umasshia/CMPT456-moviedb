@@ -35,29 +35,29 @@ const List = ({ fetchURL }) => {
           {page <= 2 ? (
             <div></div>
           ) : (
-          <button className=" hover:bg-gray-600 text-white font-bold py-2 px-4   mb-5 mr-2 ml-2" onClick={() => setPage(page - 2)} disabled={page<2 ? true: false}>
+          <button className=" hover:bg-gray-300 hover:text-[#141515] text-white font-bold py-2 px-4   mb-5 mr-2 ml-2" onClick={() => setPage(page - 2)} disabled={page<2 ? true: false}>
             &lt;&lt; 
           </button>
           )}
           {page === 1 ? (
             <div></div>
           ) : (
-          <button className=" hover:bg-gray-600 text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page - 1)} disabled={page<2 ? true: false}>
+          <button className=" hover:bg-gray-300 hover:text-[#141515] text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page - 1)} disabled={page<2 ? true: false}>
             {page-1}
           </button>
           )}
-          <button className=" hover:bg-gray-600 text-white font-bold py-2 px-4   mb-5 mr-2 ml-2" disabled={true}>
+          <button className=" hover:bg-gray-300 hover:text-[#141515] text-white font-bold py-2 px-4   mb-5 mr-2 ml-2" disabled={true}>
             {page}
           </button>
           {page < 15 ? (
-            <button className=" hover:bg-gray-600 text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page + 1)} disabled={page>15 ? true: false}>
+            <button className=" hover:bg-gray-300 hover:text-[#141515] text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page + 1)} disabled={page>15 ? true: false}>
               {page+1}
             </button>
             ) : (
             <div></div>
           )}
           {page < 14 ? (
-            <button className=" hover:bg-gray-600 text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page + 2)} disabled={page>15 ? true: false}>
+            <button className=" hover:bg-gray-300 hover:text-[#141515] text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page + 2)} disabled={page>15 ? true: false}>
               &gt;&gt; 
             </button>
           ) : (
