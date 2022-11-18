@@ -72,7 +72,7 @@ const Register = () => {
                   minLength="6"
                   onChange={e => setConfirmPassword(e.target.value)}
                 />
-                <button type="submit" className="bg-red-700 py-3 my-6 rounded font-bold">
+                <button type="submit" className="border border-gray-300 hover:bg-gray-600 py-3 my-6 font-bold">
                   Register
                 </button>
                 <div className="flex justify-between items-center text-sm text-gray-600">
