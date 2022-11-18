@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { AiFillForward, AiFillBackward } from "react-icons/ai";
 import axios from "axios";
 
 import Movie from "./Movie";
@@ -35,8 +36,8 @@ const List = ({ fetchURL }) => {
           {page <= 2 ? (
             <div></div>
           ) : (
-          <button className=" hover:bg-gray-300 hover:text-[#141515] text-white font-bold py-2 px-4   mb-5 mr-2 ml-2" onClick={() => setPage(page - 2)} disabled={page<2 ? true: false}>
-            &lt;&lt; 
+          <button className="text-2xl hover:bg-gray-300 hover:text-[#141515] text-white font-bold py-2 px-4   mb-5 mr-2 ml-2" onClick={() => setPage(page - 2)} disabled={page<2 ? true: false}>
+            <AiFillBackward />
           </button>
           )}
           {page === 1 ? (
@@ -57,8 +58,8 @@ const List = ({ fetchURL }) => {
             <div></div>
           )}
           {page < 14 ? (
-            <button className=" hover:bg-gray-300 hover:text-[#141515] text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page + 2)} disabled={page>15 ? true: false}>
-              &gt;&gt; 
+            <button className="text-2xl hover:bg-gray-300 hover:text-[#141515] text-white font-bold py-2 px-4   mb-5 ml-2 mr-2" onClick={() => setPage(page + 2)} disabled={page>15 ? true: false}>
+              <AiFillForward /> 
             </button>
           ) : (
             <div></div>
