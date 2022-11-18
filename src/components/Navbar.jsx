@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex item-center justify-between p-4 z-100 w-11/12 m-auto ">
+    <div className="flex item-center justify-between p-4 z-100 w-4/5 m-auto ">
       <Link to="/">
         <h1 className="text-5xl font-bold cursor-pointer hover:text-gray-600">
           moviedb
