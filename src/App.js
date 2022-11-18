@@ -1,7 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-import Navbar from "./components/Navbar";
 import { AuthContextProvider } from "./context/AuthContext";
+import { useParams } from "react-router-dom";
+
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Watchlist from "./pages/Watchlist";
@@ -10,10 +11,13 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import MovieInfo from "./pages/MovieInfo";
 
 function App() {
+
+  const params = useParams();
+  console.log(params)
+
   return (
     <div >
       <AuthContextProvider>
-        <Navbar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/logIn" element={<Login />}></Route>

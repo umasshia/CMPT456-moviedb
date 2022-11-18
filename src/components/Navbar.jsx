@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
+
 const Navbar = () => {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Navbar = () => {
       {user?.email ? (
         <div>
           <Link to="/account">
-            <button className="text-[#FFFDE3]  px-6 py-2 cursor-pointer hover:bg-gray-300 hover:text-[#141515] mr-3">Watchlist</button>
+            <button className="text-[#FFFDE3] px-6 py-2 cursor-pointer hover:bg-gray-300 hover:text-[#141515] mr-3">Watchlist</button>
           </Link>
           <button
             onClick={handleLogOut}

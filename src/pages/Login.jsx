@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
+import Navbar from "../components/Navbar";
 
 const Login = () => {
 
@@ -26,6 +27,7 @@ const Login = () => {
   
   return (
     <div>
+      <Navbar />
       <div className="w-full h-screen">
         <div className="fixed w-full px-4 py-24 z-50">
           <div className="max-w-[450px] h-[600px] mx-auto text-white ">

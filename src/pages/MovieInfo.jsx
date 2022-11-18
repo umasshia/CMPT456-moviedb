@@ -5,6 +5,8 @@ import { IoMdPlay } from "react-icons/io";
 import Youtube from "react-youtube";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+
+import Navbar from "../components/Navbar";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
 import { arrayUnion,doc,updateDoc,onSnapshot } from "firebase/firestore"; 
@@ -102,6 +104,7 @@ const MovieInfo = () => {
 
   return (
     <div>
+      <Navbar />
       {showModal ? (
             <>
               <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">

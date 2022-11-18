@@ -1,10 +1,13 @@
 import React, { useState } from "react"
+
 import List from "../components/List"
 import Search from "../components/Search"
 import Genre from "../components/Genre"
 
 
 const Home = () => {
+
+ 
 
   const key = process.env.REACT_APP_TMDB_API_KEY
 
