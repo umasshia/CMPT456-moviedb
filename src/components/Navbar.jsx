@@ -19,7 +19,7 @@ const Navbar = () => {
     <div className="bg-black flex item-center justify-between p-4 z-100 w-11/12 m-auto block">
       <Link to="/">
         <h1 className="text-red-600 text-4xl font-bold cursor-pointer">
-          Movie Database
+          moviedb
         </h1>
       </Link>
       {user?.email ? (

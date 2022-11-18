@@ -80,7 +80,9 @@ const Genre = ({ handleGenreChange }) => {
 				<div key={index} 
 					className="flex items-center text-[#FFFDE3] px-6 cursor-pointer bg-red-600 hover:bg-red-800 mr-3 " 
 					id={genre.id}
-					onClick={handleGenreChange} >{genre.genre}</div>
+					onClick={handleGenreChange}
+				>
+						{genre.genre}</div>
 				))}
 			</div>
 		</div>
