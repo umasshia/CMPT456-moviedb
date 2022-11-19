@@ -13,7 +13,6 @@ import { arrayUnion,doc,updateDoc,onSnapshot } from "firebase/firestore";
 
 
 const MovieInfo = () => {
-  
   const params = useParams();
   const key = process.env.REACT_APP_TMDB_API_KEY;
   const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
@@ -100,6 +99,9 @@ const MovieInfo = () => {
       alert ("You have to be logged in to save movies!")
     }
   }
+
+  console.log(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&append_to_response=videos`)
+
 
   return (
     <div>
@@ -228,7 +230,7 @@ const MovieInfo = () => {
             <div className="flex flex-row items-center ">
               <button
                 onClick={() => setShowModal(true)}
-                className="border rounded-xl text-[#FFFDE3] text-base border-[#FFFDE3] py-2 px-5 flex flex-row items-center hover:border-red-600 mb-8 md:mb-0"
+                className="border rounded-xl text-[#FFFDE3] text-base border-[#FFFDE3] py-2 px-5 flex flex-row items-center hover:bg-[#FFFDE3] hover:text-[#141515] mb-8 md:mb-0"
               >
                 <IoMdPlay className="mr-3" />
                 Trailer

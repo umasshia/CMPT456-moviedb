@@ -35,7 +35,7 @@ const SearchNav = ( { handleInput }) => {
             </div>
             {user?.email ? (
             <div>
-                <Link to="/account">
+                <Link to="/watchlist">
                     <button className="text-[#FFFDE3] px-6 py-2 cursor-pointer hover:bg-[#FFFDE3] hover:text-[#141515] mr-3">Watchlist</button>
                 </Link>
                 <button

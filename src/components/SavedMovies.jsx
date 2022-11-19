@@ -33,7 +33,7 @@ const SavedMovies = () => {
       <div className= "mx-auto max-w-2xl py-10 px-2 sm:py-10 sm:px-6 lg:max-w-7xl">
         <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
           {movies.map((item) => (
-            <div key={item.id} className="inline-block cursor-pointer relative border-4 border-double border-[#FFFDE3] p-2 z-10" onClick={() => navigate(`/${item.id}`)}>
+            <div key={item.id} className="inline-block cursor-pointer relative p-2 z-10" onClick={() => navigate(`/${item.id}`)}>
               <img
                 className="w-full h-auto block"
                 src={`https://image.tmdb.org/t/p/w500${item?.img}`}

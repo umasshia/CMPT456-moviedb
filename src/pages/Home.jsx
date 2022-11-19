@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import List from "../components/List"
 import Search from "../components/Search"
 import Genre from "../components/Genre"
+import Bottom from "../components/Bottom"
 
 
 const Home = () => {
@@ -40,6 +41,7 @@ const Home = () => {
           <List fetchURL={requestList} />
         </div>
       )}
+      <Bottom />
     </div>
   )
 }

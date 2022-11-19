@@ -9,7 +9,7 @@ const Movie = (props) => {
   }
 
   return (
-    <div className="w-[160px] sm:w-[200px] md:w-[220px] lg:w-[240px] inline-block cursor-pointer p-2 relative border-4 border-double border-[#FFFDE3]">
+    <div className="w-[160px] sm:w-[200px] md:w-[220px] lg:w-[240px] inline-block cursor-pointer p-2 relative ">
     { props.item.poster_path === null ? (
       <div>
       <img

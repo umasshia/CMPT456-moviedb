@@ -8,6 +8,7 @@ import Watchlist from "./pages/Watchlist";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MovieInfo from "./pages/MovieInfo";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -19,13 +20,14 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
             <Route path="/:movieId" element={<MovieInfo />}></Route>
           <Route
-            path="/account"
+            path="/watchlist"
             element={
               <ProtectedRoute>
                 <Watchlist />
               </ProtectedRoute>
             }
           ></Route>
+          <Route path="/about" element={<About />}></Route>
         </Routes>
       </AuthContextProvider>
     </div>

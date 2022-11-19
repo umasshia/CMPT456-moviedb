@@ -47,7 +47,7 @@ const List = ({ fetchURL }) => {
             {page-1}
           </button>
           )}
-          <button className="text-xl hover:bg-[#FFFDE3] hover:text-[#141515] text-[#FFFDE3] py-2 px-4 mb-5 mr-2 ml-2" disabled={true}>
+          <button className="text-xl bg-[#FFFDE3] text-[#141515]  py-2 px-4 mb-5 mr-2 ml-2" disabled={true}>
             {page}
           </button>
           {page < 15 ? (
