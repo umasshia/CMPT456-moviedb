@@ -109,7 +109,7 @@ const MovieInfo = () => {
               <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                 <div className="relative w-auto my-6 mx-auto max-w-3xl">
                   {}
-                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-transparent outline-none focus:outline-none">
+                  <div className="border-0 shadow-lg relative flex flex-col w-full bg-transparent outline-none focus:outline-none">
                     {}
                     <div className="flex items-start justify-between border-b p-2 ">
                       <button
@@ -149,16 +149,16 @@ const MovieInfo = () => {
         </div>
       <div className="flex justify-center ">
         <div className="flex flex-col items-center md:flex-row md:max-w-2xl lg:max-w-3xl absolute xl:max-w-4xl md:mt-[-300px] mt-[-200px] text-[#FFFDE3] ">
-          <div className=" lg:w-[30%] h-auto md:h-[400px] w-[70%] overflow-hidden">
+          <div className=" lg:w-[30%] h-auto md:h-[400px] w-[70%] overflow-hidden border-4 border-double border-[#FFFDE3] p-2">
             { tmdbData.poster_path === null ? (
               <img
-                className="w-[100%] h-full md:h-auto object-cover rounded-md"
+                className="w-[100%] h-full md:h-auto object-cover"
                 src={require("../img/placeholder.jpg")}
                 alt=""
               />
             ) : (
               <img
-                className="w-[100%] h-full md:h-auto object-cover rounded-md"
+                className="w-full h-full object-cover "
                 src={`https://image.tmdb.org/t/p/w500${tmdbData.poster_path}`}
                 alt=""
               />
