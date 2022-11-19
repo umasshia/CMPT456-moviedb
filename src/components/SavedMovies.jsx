@@ -39,8 +39,8 @@ const SavedMovies = () => {
                 src={`https://image.tmdb.org/t/p/w500${item?.img}`}
                 alt=""
               />
-              <div className="absolute top-0 left-0 w-full h-full hover:bg-black/60 opacity-0 hover:opacity-100 text-white">
-                <p onClick={()=>deleteMovie(item.id)} className="absolute text-gray-300 top-4 right-4"><AiOutlineClose/></p>
+              <div className="absolute top-0 left-0 w-full h-full hover:bg-black/60 opacity-0 hover:opacity-100 text-[#FFFDE3]">
+                <p onClick={()=>deleteMovie(item.id)} className="absolute text-[#FFFDE3] top-4 right-4"><AiOutlineClose/></p>
               </div>
             </div>
           ))}

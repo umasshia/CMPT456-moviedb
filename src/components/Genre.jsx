@@ -78,7 +78,7 @@ const Genre = ({ handleGenreChange }) => {
 			<div className ="flex overflow-scroll scrollbar-hide">
 				{genres.map((genre, index) => (
 				<div key={index} 
-					className="flex items-center text-[#FFFDE3] px-6 cursor-pointer hover:bg-gray-300 hover:text-[#141515] mr-3 " 
+					className="flex items-center text-[#FFFDE3] px-6 cursor-pointer hover:bg-[#FFFDE3] hover:text-[#141515] mr-3 " 
 					id={genre.id}
 					onClick={handleGenreChange}
 				>

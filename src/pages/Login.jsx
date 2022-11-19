@@ -29,16 +29,16 @@ const Login = () => {
       <Navbar />
       <div className="w-full h-screen">
         <div className="fixed w-full px-4 py-24 z-50">
-          <div className="max-w-[450px] h-[600px] mx-auto text-white ">
+          <div className="max-w-[450px] h-[600px] mx-auto text-[#FFFDE3] ">
             <div className="max-w-[320px] mx-auto py-16">
-              <h1 className="text-3xl text-gray-300">Log In</h1>
+              <h1 className="text-3xl text-[#FFFDE3]">Log In</h1>
               {error ? <p className='p-3 bg-red-00 mt-5'>{error}</p> : null}
               <form onSubmit={handleSubmit} 
               className="w-full flex flex-col py-4 "
               name="login-form"
               >
                 <input
-                  className="p-3 bg-inherit border border-gray-300"
+                  className="p-3 bg-inherit border border-[#FFFDE3] placeholder:text-[#FFFDE3] placeholder:opacity-50"
                   type="email"
                   placeholder="Email"
                   autoComplete="email"
@@ -46,7 +46,7 @@ const Login = () => {
                   onChange={e => setEmail(e.target.value)}
                 />
                 <input
-                  className="p-3 my-4 bg-inherit border border-gray-300"
+                  className="p-3 my-4 bg-inherit border border-[#FFFDE3] placeholder:text-[#FFFDE3] placeholder:opacity-50"
                   type="password"
                   placeholder="Password"
                   autoComplete="current-password"
@@ -54,7 +54,7 @@ const Login = () => {
                   minLength="6"
                   onChange={e => setPassword(e.target.value)}
                 />
-                <button className="border border-gray-300 hover:bg-gray-300 hover:text-[#141515] py-3 my-6 font-bold">
+                <button className="border border-[#FFFDE3] hover:bg-[#FFFDE3] hover:text-[#141515] py-3 my-6 font-bold">
                   Log In
                 </button>
                 <div className="flex justify-between items-center text-sm text-gray-600">

@@ -4,13 +4,13 @@
 
 body {
   font-style: Verdana, sans-serif;
-  background: #141515;  
-  background: linear-gradient(to top, #252627, #1a1b1c); 
+  background: #191a1a;  
 }
 
 h1 {
   color: transparent;
   -webkit-text-stroke-width: 1.5px;
-  -webkit-text-stroke-color: #e0e0e0;
+  -webkit-text-stroke-color: #FFFDE3;
 }
+
 

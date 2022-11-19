@@ -9,7 +9,7 @@ const Movie = (props) => {
   }
 
   return (
-    <div className="w-[160px] sm:w-[220px] md:w-[270px] lg:w-[270px] inline-block cursor-pointer relative z-0 ">
+    <div className="w-[160px] sm:w-[200px] md:w-[220px] lg:w-[240px] inline-block cursor-pointer relative z-0 ">
     { props.item.poster_path === null ? (
       <div>
       <img
@@ -18,7 +18,7 @@ const Movie = (props) => {
         alt=""
         onClick={handleClick}
       />
-      <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/50 opacity-0 hover:opacity-100 text-white px-5 text-right">
+      <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/50 opacity-0 hover:opacity-100 text-[#FFFDE3] px-5 text-right">
         <div className="flex w-11/12 overflow-y m-auto absolute self-right top-4 ">
           <p className="text-s font-bold">{props.item?.title} </p>
         </div>
@@ -32,7 +32,7 @@ const Movie = (props) => {
         onClick={handleClick}
         alt=""
       />
-      <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/70 opacity-0 hover:opacity-100 text-white px-5">
+      <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/70 opacity-0 hover:opacity-100 text-[#FFFDE3] px-5">
         <div className="flex w-11/12 overflow-y m-auto absolute self-right top-4 ">
           <p className="text-s font-bold">{props.item?.title} </p>
         </div>

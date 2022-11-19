@@ -113,10 +113,10 @@ const MovieInfo = () => {
                     {}
                     <div className="flex items-start justify-between border-b p-2 ">
                       <button
-                        className="p-1 ml-auto bg-transparent border-0 text-white opacity-100  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                        className="p-1 ml-auto bg-transparent border-0 text-[#FFFDE3] opacity-100  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setShowModal(false)}
                       >
-                        <span className="bg-transparent text-white opacity-100  h-6 w-6 text-2xl block outline-none focus:outline-none">
+                        <span className="bg-transparent text-[#FFFDE3] opacity-100  h-6 w-6 text-2xl block outline-none focus:outline-none">
                         <AiOutlineClose/>
                         </span>
                       </button>
@@ -148,7 +148,7 @@ const MovieInfo = () => {
         >
         </div>
       <div className="flex justify-center ">
-        <div className="flex flex-col items-center md:flex-row md:max-w-2xl lg:max-w-3xl absolute xl:max-w-4xl md:mt-[-300px] mt-[-200px] text-white ">
+        <div className="flex flex-col items-center md:flex-row md:max-w-2xl lg:max-w-3xl absolute xl:max-w-4xl md:mt-[-300px] mt-[-200px] text-[#FFFDE3] ">
           <div className=" lg:w-[30%] h-auto md:h-[400px] w-[70%] overflow-hidden">
             { tmdbData.poster_path === null ? (
               <img
@@ -228,7 +228,7 @@ const MovieInfo = () => {
             <div className="flex flex-row items-center ">
               <button
                 onClick={() => setShowModal(true)}
-                className="border rounded-xl text-[#FFFDE3] text-base border-gray-300 py-2 px-5 flex flex-row items-center hover:border-red-600 mb-8 md:mb-0"
+                className="border rounded-xl text-[#FFFDE3] text-base border-[#FFFDE3] py-2 px-5 flex flex-row items-center hover:border-red-600 mb-8 md:mb-0"
               >
                 <IoMdPlay className="mr-3" />
                 Trailer
@@ -237,11 +237,11 @@ const MovieInfo = () => {
               
                 {like ? (
                   <p onClick={deleteMovie}  className="cursor-pointer">
-                    <FaBookmark className="text-gray-300 text-2xl ml-6 mb-8 md:mb-0" />
+                    <FaBookmark className="text-[#FFFDE3] text-2xl ml-6 mb-8 md:mb-0" />
                   </p>
                 ) : (
                   <p onClick={saveMovie}className="cursor-pointer">
-                    <FaRegBookmark className="text-gray-300 text-2xl ml-6 mb-8 md:mb-0" />
+                    <FaRegBookmark className="text-[#FFFDE3] text-2xl ml-6 mb-8 md:mb-0" />
                   </p>
                 )}
               
