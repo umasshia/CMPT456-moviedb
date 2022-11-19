@@ -117,7 +117,7 @@ const MovieInfo = () => {
                         onClick={() => setShowModal(false)}
                       >
                         <span className="bg-transparent text-[#FFFDE3] opacity-100  h-6 w-6 text-2xl block outline-none focus:outline-none">
-                        <AiOutlineClose/>
+                        <AiOutlineClose />
                         </span>
                       </button>
                     </div>
