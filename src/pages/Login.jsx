@@ -27,46 +27,36 @@ const Login = () => {
   return (
     <div>
       <Navbar />
-      <div className="w-full h-screen">
-        <div className="fixed w-full px-4 py-24 z-50">
-          <div className="max-w-[450px] h-[600px] mx-auto text-[#FFFDE3] ">
-            <div className="max-w-[320px] mx-auto py-16">
-              <h1 className="text-3xl text-[#FFFDE3]">Log In</h1>
-              {error ? <p className='p-3 bg-red-00 mt-5'>{error}</p> : null}
-              <form onSubmit={handleSubmit} 
-              className="w-full flex flex-col py-4 "
-              name="login-form"
-              >
-                <input
-                  className="p-3 bg-inherit border border-[#FFFDE3] placeholder:text-[#FFFDE3] placeholder:opacity-50"
-                  type="email"
-                  placeholder="Email"
-                  autoComplete="email"
-                  required
-                  onChange={e => setEmail(e.target.value)}
-                />
-                <input
-                  className="p-3 my-4 bg-inherit border border-[#FFFDE3] placeholder:text-[#FFFDE3] placeholder:opacity-50"
-                  type="password"
-                  placeholder="Password"
-                  autoComplete="current-password"
-                  required
-                  minLength="6"
-                  onChange={e => setPassword(e.target.value)}
-                />
-                <button className="border border-[#FFFDE3] hover:bg-[#FFFDE3] hover:text-[#141515] py-3 my-6 font-bold">
-                  Log In
-                </button>
-                <div className="flex justify-between items-center text-sm text-gray-600">
-                </div>
-                <p className="py-8">
-                  <span className="text-gray-600">Don't have an account?</span>{" "}
-                  <Link to="/register">Register</Link>
-                </p>
-              </form>
-            </div>
-          </div>
-        </div>
+      <div className="form-container">
+        <h1 className="form-header">Log In</h1>
+        {error ? <p className="error">{error}</p> : null}
+        <form onSubmit={handleSubmit} 
+        className="form"
+        name="login-form"
+        >
+          <input
+            className="input"
+            type="email"
+            placeholder="Email"
+            autoComplete="email"
+            required
+            onChange={e => setEmail(e.target.value)}
+          />
+          <input
+            className="input"
+            type="password"
+            placeholder="Password"
+            autoComplete="current-password"
+            required
+            minLength="6"
+            onChange={e => setPassword(e.target.value)}
+          />
+          <button className="submit-btn">
+            Log In
+          </button>
+            <span className="form-footer">Don't have an account?</span>{" "}
+            <Link to="/register">Register</Link>
+        </form>
       </div>
     </div>
   );

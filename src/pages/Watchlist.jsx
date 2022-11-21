@@ -6,9 +6,8 @@ const Watchlist = () => {
   return (
     <div>
       <Navbar />
-      <div className='w-full text-[#FFFDE3]'>
-        <div className='w-full h-[150px] object-cover'></div>
-          <h1 className='text-3xl md:text-5xl font-bold text-center'>Watchlist</h1>
+      <div className='watchlist-wrap'>
+          <h1 className='watchlist-header'>Watchlist</h1>
       </div>
       <SavedMovies />
     </div>

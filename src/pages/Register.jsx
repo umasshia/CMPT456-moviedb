@@ -37,57 +37,49 @@ const Register = () => {
   return (
     <div>
       <Navbar />
-      <div className="w-full h-screen">
-        <div className="fixed w-full px-4 py-24 z-50">
-          <div className="max-w-[450px] h-[600px] mx-auto text-[#FFFDE3]">
-            <div className="max-w-[320px] mx-auto py-16">
-              <h1 className="text-3xl text-[#FFFDE3]">Register</h1>
-              <form
-                onSubmit={handleSubmit}
-                className="w-full flex flex-col py-4"
-              >
-                <input
-                  className="p-3 my-2 bg-inherit border border-[#FFFDE3] placeholder:text-[#FFFDE3] placeholder:opacity-50"
-                  type="email"
-                  placeholder="Email"
-                  autoComplete="email"
-                  required
-                  onChange={e => setEmail(e.target.value)}
-                />
-                
-                <input
-                  className="p-3 my-2 bg-inherit border border-[#FFFDE3] placeholder:text-[#FFFDE3] placeholder:opacity-50"
-                  type="password"
-                  placeholder="Password"
-                  autoComplete="current-password"
-                  required
-                  minLength="6"
-                  onChange={e => setPassword(e.target.value)}
-                />
-                <input
-                  className="p-3 my-2 bg-inherit border border-[#FFFDE3] placeholder:text-[#FFFDE3] placeholder:opacity-50"
-                  type="password"
-                  placeholder="Confirm Password"
-                  autoComplete="current-password"
-                  required
-                  minLength="6"
-                  onChange={e => setConfirmPassword(e.target.value)}
-                />
-                <button type="submit" className="border border-[#FFFDE3] hover:bg-[#FFFDE3] hover:text-[#141515] py-3 my-6 font-bold">
-                  Register
-                </button>
-                <div className="flex justify-between items-center text-sm text-gray-600">
-                </div>
-                <p className="py-8">
-                  <span className="text-gray-600">
-                    Already have an account?
-                  </span>{" "}
-                  <Link to="/logIn">Log In</Link>
-                </p>
-              </form>
-            </div>
+      <div className="form-container">
+        <h1 className="form-header">Register</h1>
+        <form
+          onSubmit={handleSubmit}
+          className="form"
+        >
+          <input
+            className="input"
+            type="email"
+            placeholder="Email"
+            autoComplete="email"
+            required
+            onChange={e => setEmail(e.target.value)}
+          />
+          
+          <input
+            className="input"
+            type="password"
+            placeholder="Password"
+            autoComplete="current-password"
+            required
+            minLength="6"
+            onChange={e => setPassword(e.target.value)}
+          />
+          <input
+            className="input"
+            type="password"
+            placeholder="Confirm Password"
+            autoComplete="current-password"
+            required
+            minLength="6"
+            onChange={e => setConfirmPassword(e.target.value)}
+          />
+          <button type="submit" className="submit-btn">
+            Register
+          </button>
+          <div>
+            <span className="form-footer">
+              Already have an account?
+            </span>{" "}
+            <Link to="/logIn">Log In</Link>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

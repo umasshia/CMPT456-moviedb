@@ -1,5 +1,6 @@
 import React from "react";
 import {useNavigate} from 'react-router-dom';
+import Preview from "./Peview";
 
 const Movie = (props) => {
   const navigate= useNavigate();
@@ -9,32 +10,35 @@ const Movie = (props) => {
   }
 
   return (
-    <div className="w-[160px] sm:w-[200px] md:w-[220px] lg:w-[240px] inline-block cursor-pointer p-2 relative ">
+    <div className="movie-container">
     { props.item.poster_path === null ? (
       <div>
       <img
-        className="w-full h-auto hover:opacity-50"
+        className="movie-poster"
         src={require("../img/placeholder.jpg")}
         alt=""
         onClick={handleClick}
       />
-      <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/50 opacity-0 hover:opacity-100 text-[#FFFDE3] px-5 text-right">
-        <div className="flex w-11/12 overflow-y m-auto absolute self-right top-4 ">
-          <p className="text-s font-bold">{props.item?.title} </p>
+      <div onClick={handleClick} className="movie-poster-cover">
+        <div className="poster-title-container">
+          <p className="poster-title">{props.item?.title} </p>
+          <Preview item={props.item}></Preview>
         </div>
       </div>
     </div>
     ) : (
-    <div className=" ">
+    <div>
       <img
-        className="w-full h-auto hover:opacity-50 "
+        className="movie-poster"
         src={`https://image.tmdb.org/t/p/w500${props.item?.poster_path}`}
         onClick={handleClick}
         alt=""
       />
-      <div onClick={handleClick} className="absolute top-0 left-0 w-full h-full hover:bg-black/70 opacity-0 hover:opacity-100 text-[#FFFDE3] px-5">
-        <div className="flex w-11/12 overflow-y m-auto absolute self-right top-4 ">
-          <p className="text-s font-bold">{props.item?.title} </p>
+      <div onClick={handleClick} className="movie-poster-cover">
+        <div className="poster-title-container">
+          <p className="poster-title">{props.item?.title} </p>
+          <br />
+          <Preview item={props.item}></Preview>
         </div>
       </div>
     </div>

@@ -12,13 +12,13 @@ import About from "./pages/About";
 
 function App() {
   return (
-    <div >
+    <div>
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/logIn" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
-            <Route path="/:movieId" element={<MovieInfo />}></Route>
+          <Route path="/:movieId" element={<MovieInfo />}></Route>
           <Route
             path="/watchlist"
             element={

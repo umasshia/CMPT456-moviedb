@@ -74,11 +74,11 @@ const Genre = ({ handleGenreChange }) => {
 	]
 
 	return (
-		<div className="w-4/5 m-auto mt-4">
-			<div className ="flex overflow-scroll scrollbar-hide">
+		<div className="genre-list-container">
+			<div className ="genre-list">
 				{genres.map((genre, index) => (
 				<div key={index} 
-					className="flex items-center text-[#FFFDE3] px-6 cursor-pointer hover:bg-[#FFFDE3] hover:text-[#141515] mr-3 " 
+					className="genre" 
 					id={genre.id}
 					onClick={handleGenreChange}
 				>

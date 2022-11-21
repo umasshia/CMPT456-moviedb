@@ -17,20 +17,20 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex item-center justify-between p-4 z-100 w-11/12 m-auto ">
+    <div className="navbar">
       <Link to="/">
-        <h1 className="text-5xl font-bold cursor-pointer hover:text-[#FFFDE3]">
+        <h1 className="moviedb">
           moviedb
         </h1>
       </Link>
       {user?.email ? (
         <div>
           <Link to="/watchlist">
-            <button className="text-[#FFFDE3] px-6 py-2 cursor-pointer hover:bg-[#FFFDE3] hover:text-[#141515] mr-3">Watchlist</button>
+            <button className="clear-btn">Watchlist</button>
           </Link>
           <button
             onClick={handleLogOut}
-            className="text-[#FFFDE3] border border-[#FFFDE3] px-6 py-2 cursor-pointer hover:bg-[#FFFDE3] hover:text-[#141515] "
+            className="reg-btn"
           >
             Logout
           </button>
@@ -38,10 +38,10 @@ const Navbar = () => {
       ) : (
         <div>
           <Link to="/logIn">
-            <button className="text-[#FFFDE3] px-6 py-2 cursor-pointer hover:bg-[#FFFDE3] hover:text-[#141515] mr-3">Log In</button>
+            <button className="clear-btn">Log In</button>
           </Link>
           <Link to="/register">
-            <button className="text-[#FFFDE3] border border-[#FFFDE3] px-6 py-2 cursor-pointer hover:bg-[#FFFDE3] hover:text-[#141515]">
+            <button className="reg-btn">
               Register
             </button>
           </Link>
