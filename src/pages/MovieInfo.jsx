@@ -22,7 +22,7 @@ const MovieInfo = () => {
   const [omdbId, setOmdbId] = useState('');
   const [omdbData, setOmdbData] = useState([]);
   const [tmdbData, setTmdbData] = useState([]);
-  const [tomatoScore, setTomatoScore] = useState([]);
+  const [tomatoScore, setTomatoScore] = useState('');
   const [trailer, setTrailer] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [saved, setSaved] = useState([]);
@@ -53,7 +53,11 @@ const MovieInfo = () => {
     ).then((response) => {
       setOmdbData(response.data);
       let tomato = response.data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
-      setTomatoScore(tomato.Value)
+      if(tomato === undefined) { 
+        setTomatoScore('N/A')  
+      }else{
+        setTomatoScore(tomato.Value)
+      }     
     }).catch((error) => {
         console.log(error);
     });

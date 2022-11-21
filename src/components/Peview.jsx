@@ -32,7 +32,11 @@ const Preview = (props) => {
         ).then((response) => {
             setOmdbData(response.data);
             let tomato = response.data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
-            setTomatoScore(tomato.Value)
+            if(tomato === undefined) { 
+                setTomatoScore('N/A')  
+            }else{
+                setTomatoScore(tomato.Value)
+            }
         }).catch((error) => {
             console.log(error);
         });

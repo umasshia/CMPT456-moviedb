@@ -5,6 +5,8 @@ import { updateDoc, doc, onSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { HiTrash } from "react-icons/hi";
 
+import Preview from "./Peview";
+
 const SavedMovies = () => {
     const [movies,setMovies] = useState([])
     const {user}= UserAuth();
@@ -47,6 +49,13 @@ const SavedMovies = () => {
                   className="delete-icon">
                   <HiTrash />
                 </div>
+                <div className="movie-poster-cover">
+                <div className="poster-title-container">
+                    <br />
+                    <p className="poster-title">{item?.title} </p>
+                    <Preview item={item}></Preview>
+              </div>
+              </div>
               </div>
             </div>
           ))}

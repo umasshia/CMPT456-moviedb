@@ -20,6 +20,10 @@ h1 {
   -webkit-text-stroke-color: #FFFDE3;
 }
 
+br {
+  margin:10px 0;
+}
+
 .navbar {
   display: flex;
   align-items: center;
@@ -249,6 +253,7 @@ h1 {
   font-size: 20px;
   line-height: 28px; 
   color: #FFFDE3;
+  z-index: 60;
 }
 
 .watchlist-wrap {
@@ -455,6 +460,32 @@ h1 {
   font-size: x-large;
   margin-left: 24px;
   cursor: pointer;
+}
+
+.credits {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+}
+
+.credits-img {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.credits-logo {
+  height: auto;
+  width: 170px;
+}
+
+.credits-logo-git {
+  width: 100px;
 }
 
 @media (min-width: 300px) { 
