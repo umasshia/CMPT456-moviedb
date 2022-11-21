@@ -393,10 +393,10 @@ h1 {
 
 .movie-info-poster {
   height: 100%;
-  width: 90%;
+  width: 50%;
   border: double 4px;
   padding: 8px;
-  min-width: 200px;
+  max-width: 250px;
   border-color: #FFFDE3;
 }
 
@@ -480,6 +480,9 @@ h1 {
   .movie-info-text {
     align-items: center;
   }
+  .movie-info-poster {
+    width: 50%;
+  }
 }
 
 @media (min-width: 1024px) { 
@@ -508,6 +511,9 @@ h1 {
   .movie-info-text {
     align-items: center;
   }
+  .movie-info-poster {
+    width: 60%;
+  }
 }
 @media (min-width: 1280px) { 
   .moviedb {
@@ -530,5 +536,8 @@ h1 {
   }
   .movie-info-text {
     align-items: start;
+  }
+  .movie-info-poster {
+    width: 70%;
   }
 }
