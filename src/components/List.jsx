@@ -4,12 +4,11 @@ import axios from "axios";
 
 import Movie from "./Movie";
 
-const List = ({ fetchURL }) => {
+const List = ({ mediaType, fetchURL }) => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    console.log(fetchURL + page)
     axios.get(fetchURL + page)
     .then((response) => {
         setMovies(response.data.results);
@@ -19,15 +18,14 @@ const List = ({ fetchURL }) => {
     });
   }, [page, fetchURL]);
 
-
   return (
     <div>
       <div className="list-wrap">
         <div className='movie-list'>
           {movies.map((item) => {
             return (
-              <Movie key={item.id} item={item} ></Movie>
-            );
+              <Movie mediaType={mediaType} key={item.id} item={item} ></Movie>
+            )
           })}
         </div>      
       </div>

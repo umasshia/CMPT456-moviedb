@@ -1,12 +1,12 @@
 import React from "react";
 import {useNavigate} from 'react-router-dom';
-import Preview from "./Peview";
+import Preview from "./Preview";
 
 const Movie = (props) => {
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   const handleClick=()=>{
-    navigate(`/${props.item.id}`)
+    navigate(`/${props?.mediaType}/${props.item.id}`)
   }
 
   return (
@@ -20,10 +20,7 @@ const Movie = (props) => {
         onClick={handleClick}
       />
       <div onClick={handleClick} className="movie-poster-cover">
-        <div className="poster-title-container">
-          <p className="poster-title">{props.item?.title} </p>
-          <Preview item={props.item}></Preview>
-        </div>
+        <Preview mediaType={props?.mediaType} item={props.item}></Preview>
       </div>
     </div>
     ) : (
@@ -35,11 +32,7 @@ const Movie = (props) => {
         alt=""
       />
       <div onClick={handleClick} className="movie-poster-cover">
-        <div className="poster-title-container">
-          <p className="poster-title">{props.item?.title} </p>
-          <br />
-          <Preview item={props.item}></Preview>
-        </div>
+        <Preview mediaType={props?.mediaType} item={props.item}></Preview>
       </div>
     </div>
     )}

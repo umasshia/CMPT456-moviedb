@@ -5,7 +5,7 @@ import { updateDoc, doc, onSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { HiTrash } from "react-icons/hi";
 
-import Preview from "./Peview";
+import Preview from "./Preview";
 
 const SavedMovies = () => {
     const [movies,setMovies] = useState([])
@@ -35,7 +35,7 @@ const SavedMovies = () => {
       <div className= "list-wrap">
         <div className="movie-list">
           {movies.map((item) => (
-            <div key={item.id} className="movie-container" onClick={() => navigate(`/${item.id}`)}>
+            <div key={item.id} className="movie-container" onClick={() => navigate(`/${item.type}/${item.id}`)}>
               <img
                 className="movie-poster"
                 src={`https://image.tmdb.org/t/p/w500${item?.img}`}
@@ -51,9 +51,7 @@ const SavedMovies = () => {
                 </div>
                 <div className="movie-poster-cover">
                 <div className="poster-title-container">
-                    <br />
-                    <p className="poster-title">{item?.title} </p>
-                    <Preview item={item}></Preview>
+                    <Preview mediaType={item.type} item={item}></Preview>
               </div>
               </div>
               </div>

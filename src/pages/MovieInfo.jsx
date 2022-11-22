@@ -18,6 +18,7 @@ const MovieInfo = () => {
   const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
 
   const movieId = params.movieId;
+  const mediaType = params.mediaType;
 
   const [omdbId, setOmdbId] = useState('');
   const [omdbData, setOmdbData] = useState([]);
@@ -33,11 +34,9 @@ const MovieInfo = () => {
 
   useEffect(() => {
     axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&append_to_response=videos`
+      `https://api.themoviedb.org/3/${mediaType}/${movieId}?api_key=${key}&append_to_response=videos`
     ).then((response) => {
       setTmdbData(response.data);
-      let omId = response.data.imdb_id;
-      setOmdbId(omId);
       const trailerid = response.data.videos.results.find(
         (vid) => vid.name === "Official Trailer"
       );
@@ -45,23 +44,46 @@ const MovieInfo = () => {
     }).catch((error) => {
       console.log(error);
     })
-  }, [omdbId,key,omdbKey,movieId]);
+  }, [key,movieId,mediaType]);
 
   useEffect(() => {
+    var type = 'movie';
+    if(mediaType === 'tv'){
+        type = 'series';
+        axios.get(
+            `https://api.themoviedb.org/3/tv/${movieId}/external_ids?api_key=${key}`
+        ).then((response) => {
+            let omId = response.data.imdb_id;
+            setOmdbId(omId);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }else {
+        axios.get(
+            `https://api.themoviedb.org/3/${mediaType}/${movieId}?api_key=${key}&append_to_response=videos`
+        ).then((response) => {
+            let omId = response.data.imdb_id;
+            setOmdbId(omId);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }             
     axios.get(
-    `https://www.omdbapi.com/?apikey=${omdbKey}&i=${omdbId}`
+    `https://www.omdbapi.com/?apikey=${omdbKey}&type=${type}&i=${omdbId}`
     ).then((response) => {
-      setOmdbData(response.data);
-      let tomato = response.data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
-      if(tomato === undefined) { 
-        setTomatoScore('N/A')  
-      }else{
-        setTomatoScore(tomato.Value)
-      }     
+        setOmdbData(response.data);
+        if(response.data.Ratings !== undefined) {
+            let tomato = response.data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
+            if(tomato === undefined) { 
+                setTomatoScore('N/A')  
+            }else{
+                setTomatoScore(tomato.Value)
+            }
+        }
     }).catch((error) => {
         console.log(error);
     });
-  }, [omdbId, omdbKey, movieId, tomatoScore]);
+  }, [key, mediaType, movieId, omdbKey, omdbId]);
 
   useEffect(() => {
     onSnapshot(doc(db,'users',`${user?.email}`),(doc)=>{
@@ -78,7 +100,6 @@ const MovieInfo = () => {
     try{
       // eslint-disable-next-line
       const result = saved.filter((item)=> toString(item.id) != movieId)
-      console.log(movieId)
       await updateDoc(movieID,{
         savedMovies: result
       })
@@ -88,6 +109,8 @@ const MovieInfo = () => {
     }
   }
 
+  console.log()
+
   const saveMovie = async() => {
     if (user?.email){
       if(like === false){
@@ -95,8 +118,9 @@ const MovieInfo = () => {
         updateDoc(movieID,{
           savedMovies:arrayUnion({
             id: tmdbData.id,
-            title: tmdbData.title,
-            img:tmdbData.poster_path
+            title: omdbData.Title,
+            img:tmdbData.poster_path,
+            type:mediaType
           })
         })
       }
@@ -157,7 +181,7 @@ const MovieInfo = () => {
         </div>
         <div className="movie-info-text">
           <p className="movie-info-title">
-              {tmdbData.title || tmdbData.original_title}{" "}
+              {omdbData.Title}{" "}
           </p>
           <div className="movie-info-stats">
             <div className="movie-info-ratings">
@@ -191,19 +215,22 @@ const MovieInfo = () => {
             </div>
             <div className="movie-info-general">
               <div>
-                Released:&nbsp;  {tmdbData?.release_date}{" "}
+                Director:&nbsp;  {omdbData?.Director}{" "}
               </div>
               <div>
-                Runtime:&nbsp;  {tmdbData?.runtime} min
+                Writer:&nbsp;  {omdbData?.Writer}{" "}
               </div>
               <div>
-                Genres:&nbsp; 
-                  {tmdbData.genres &&
-                    tmdbData.genres.slice(0, 5).map((genre, i) => (
-                      <span key={i} >
-                        {genre.name};&nbsp;
-                      </span>
-                  ))}
+                Cast:&nbsp;  {omdbData?.Actors}{" "}
+              </div>
+              <div>
+                Released:&nbsp;  {omdbData?.Released}{" "}
+              </div>
+              <div>
+                Runtime:&nbsp;  {omdbData?.Runtime} 
+              </div>
+              <div>
+                Genres:&nbsp; {omdbData?.Genre}
               </div>
             </div>
           </div>

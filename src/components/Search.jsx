@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
 
-const Search = ( { handleInput }) => {
+const Search = ( { mediaType, handleMediaType, handleInput }) => {
     const { user, logOut } = UserAuth();
     const navigate = useNavigate();
 
@@ -23,13 +23,48 @@ const Search = ( { handleInput }) => {
                         moviedb
                     </h1>
                 </Link>
-                <div>
-                    <input o
-                        type="text" 
-                        placeholder="Search..." 
-                        className="searchbox" 
-                        onChange={handleInput}
+                <div className="navbar-search">
+                    <input 
+                    type="text" 
+                    placeholder="Search..." 
+                    className="searchbox" 
+                    onChange={handleInput}
                     />
+                    {mediaType === "movie" ? (
+                        <>
+                        <button
+                        onClick={handleMediaType}
+                        className="selected-btn"
+                        id="movie"
+                        >
+                        Movies
+                        </button>
+                        <button
+                        onClick={handleMediaType}
+                        className="reg-btn"
+                        id="tv"
+                        >
+                        TV Shows
+                        </button>
+                        </>
+                    ) : (
+                        <>
+                        <button
+                        onClick={handleMediaType}
+                        className="reg-btn"
+                        id="movie"
+                        >
+                        Movies
+                        </button>
+                        <button
+                        onClick={handleMediaType}
+                        className="selected-btn"
+                        id="tv"
+                        >
+                        TV Shows
+                        </button>
+                        </>
+                    )}
                 </div>
             {user?.email ? (
             <div>

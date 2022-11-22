@@ -13,7 +13,13 @@ const Home = () => {
   const key = process.env.REACT_APP_TMDB_API_KEY
 
   const [movieTitle, setTitle] = useState("");
+  const [mediaType, setMediaType] = useState("movie");
   const [genre, setGenre] = useState("");
+  
+  const handleMediaType = (e) => {
+    setMediaType(e.target.id);
+    setGenre("")
+  }
 
   const handleInput = (e) => {
     setTitle(e.target.value);
@@ -21,24 +27,25 @@ const Home = () => {
 
   const handleGenreChange = (e) => {
     setGenre(e.target.id);
-    console.log(requestList);
   }
 
-  const requestList = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&with_genres=${genre}&page=`;
+  const requestList = `https://api.themoviedb.org/3/discover/${mediaType}?api_key=${key}&with_genres=${genre}&page=`;
 
-  const requestSearch = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${movieTitle}&page=`;
+  const requestSearch = `https://api.themoviedb.org/3/search/${mediaType}?api_key=${key}&query=${movieTitle}&page=`;
+
+  //const topRatedSearch = `https://api.themoviedb.org/3/movie/top_rated?api_key=${key}&page=`;
 
   return (
     <div> 
-      <Search handleInput={handleInput} />
+      <Search mediaType={mediaType} handleMediaType={handleMediaType} handleInput={handleInput} />
       {/^(.{2,})$/.test(movieTitle) ? (
         <div> 
-          <List fetchURL={requestSearch} />
+          <List mediaType={mediaType} fetchURL={requestSearch} />
         </div>
       ) : (
         <div> 
-          <Genre handleGenreChange={handleGenreChange} />
-          <List fetchURL={requestList} />
+          <Genre genreSelection={genre} mediaType={mediaType} handleGenreChange={handleGenreChange} />
+          <List mediaType={mediaType} fetchURL={requestList} />
         </div>
       )}
       <Bottom />
