@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { IoMdPlay } from "react-icons/io";
 import Youtube from "react-youtube";
@@ -28,62 +27,74 @@ const MovieInfo = () => {
   const [showModal, setShowModal] = useState(false);
   const [saved, setSaved] = useState([]);
   const [like, setLike] = useState(false);
+  const [type, setType] = useState('movie')
   const {user} = UserAuth();
 
   const movieID = doc(db, 'users', `${user?.email}`);
 
   useEffect(() => {
-    axios.get(
+    fetch(
       `https://api.themoviedb.org/3/${mediaType}/${movieId}?api_key=${key}&append_to_response=videos`
-    ).then((response) => {
-      setTmdbData(response.data);
-      const trailerid = response.data.videos.results.find(
+    ).then((response) => response.json())
+    .then((data) => { 
+      setTmdbData(data);
+      const trailerid = data.videos.results.find(
         (vid) => vid.name === "Official Trailer"
       );
-      setTrailer(trailerid ? trailerid : response.data.videos.results[0]);
-    }).catch((error) => {
+      setTrailer(trailerid ? trailerid : data.videos.results[0]);
+    })
+    .catch((error) => {
       console.log(error);
     })
   }, [key,movieId,mediaType]);
 
   useEffect(() => {
-    var type = 'movie';
     if(mediaType === 'tv'){
-        type = 'series';
-        axios.get(
+      setType('series');
+        fetch(
             `https://api.themoviedb.org/3/tv/${movieId}/external_ids?api_key=${key}`
-        ).then((response) => {
-            let omId = response.data.imdb_id;
-            setOmdbId(omId);
-        }).catch((error) => {
+        ).then((response) => response.json())
+        .then((data) => { 
+            setOmdbId(data.imdb_id);
+        })
+        .catch((error) => {
             console.log(error);
         })
     }else {
-        axios.get(
+        fetch(
             `https://api.themoviedb.org/3/${mediaType}/${movieId}?api_key=${key}&append_to_response=videos`
-        ).then((response) => {
-            let omId = response.data.imdb_id;
-            setOmdbId(omId);
-        }).catch((error) => {
+        ).then((response) => response.json())
+        .then((data) => { 
+          setOmdbId(data.imdb_id);
+        })
+        .catch((error) => {
             console.log(error);
         })
-    }             
-    axios.get(
-    `https://www.omdbapi.com/?apikey=${omdbKey}&type=${type}&i=${omdbId}`
-    ).then((response) => {
-        setOmdbData(response.data);
-        if(response.data.Ratings !== undefined) {
-            let tomato = response.data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
+    }     
+  }, [key, mediaType, movieId, omdbKey, omdbId]);
+
+  useEffect(() => {
+    fetch(
+        `https://www.omdbapi.com/?apikey=${omdbKey}&type=${type}&i=${omdbId}`
+        )
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data)
+        setOmdbData(data)
+    
+        if(data.Ratings !== undefined) {
+            let tomato = data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
             if(tomato === undefined) { 
                 setTomatoScore('N/A')  
             }else{
                 setTomatoScore(tomato.Value)
             }
         }
-    }).catch((error) => {
+    })
+    .catch((error) => {
         console.log(error);
     });
-  }, [key, mediaType, movieId, omdbKey, omdbId]);
+},[omdbId,omdbKey,type])
 
   useEffect(() => {
     onSnapshot(doc(db,'users',`${user?.email}`),(doc)=>{
@@ -108,8 +119,6 @@ const MovieInfo = () => {
       console.log(error)
     }
   }
-
-  console.log()
 
   const saveMovie = async() => {
     if (user?.email){

@@ -1,61 +1,70 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-
 
 const Preview = (props) => {
     const key = process.env.REACT_APP_TMDB_API_KEY;
     const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
-    const movieId = props.item?.id;
+
+    const movieId = props.id;
     const mediaType = props.mediaType;
 
     const [omdbId, setOmdbId] = useState('');
-    const [omdbData, setOmdbData] = useState([]);
     const [tomatoScore, setTomatoScore] = useState([]);
-    
-    useEffect(() => {
-        var type = 'movie';
+    const [metaScore, setMetaScore] = useState([]);
+    const [imdbScore, setImdbScore] = useState([]);
+    const [title, setTitle] = useState([])
+    const [genres, setGenres] = useState([])
+    const [date, setDate] = useState([])
+    const [runtime, setRuntime] = useState([])
+    const [seasons, setSeasons] = useState([])
+
+    const [type, setType] = useState('movie')
+
+    const tmdbUrl = `https://api.themoviedb.org/3/${mediaType}/${movieId}/external_ids?api_key=${key}`;
+    const omdbUrl = `https://www.omdbapi.com/?apikey=${omdbKey}&type=${type}&i=${omdbId}`;
+
+    useEffect(() => {   
         if(mediaType === 'tv'){
-            type = 'series';
-            axios.get(
-                `https://api.themoviedb.org/3/tv/${movieId}/external_ids?api_key=${key}`
-            ).then((response) => {
-                let omId = response.data.imdb_id;
-                setOmdbId(omId);
-            }).catch((error) => {
-                console.log(error);
-            })
-        }else {
-            axios.get(
-                `https://api.themoviedb.org/3/${mediaType}/${movieId}?api_key=${key}&append_to_response=videos`
-            ).then((response) => {
-                let omId = response.data.imdb_id;
-                setOmdbId(omId);
-            }).catch((error) => {
-                console.log(error);
-            })
-        }             
-        axios.get(
-        `https://www.omdbapi.com/?apikey=${omdbKey}&type=${type}&i=${omdbId}`
-        ).then((response) => {
-            setOmdbData(response.data);
-            if(response.data.Ratings !== undefined) {
-                let tomato = response.data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
+            setType('series');
+        }
+        fetch(tmdbUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            let imId = data.imdb_id;
+            console.log(data.imdb_id)
+            setOmdbId(imId)
+        })
+        .catch((error) => {
+            console.log(error);
+        })        
+        fetch(omdbUrl)
+        .then((response) => response.json())
+        .then((data) => {     
+            if(data.Ratings !== undefined) {
+                let tomato = data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
                 if(tomato === undefined) { 
                     setTomatoScore('N/A')  
                 }else{
                     setTomatoScore(tomato.Value)
                 }
             }
-        }).catch((error) => {
+            
+            data.imdbRating !== undefined ? setImdbScore(data.imdbRating) : setImdbScore('N/A')
+            data.Metascore !== undefined ? (setMetaScore(data.Metascore)) : setMetaScore('N/A')
+            data.Title !== undefined ? (setTitle(data.Title)) : setTitle('N/A')
+            data.Runtime !== undefined ? (setRuntime(data.Runtime)) : setRuntime('N/A')
+            data.Released !== undefined ? (setDate(data.Released)) : setDate('N/A')
+            data.Genre !== undefined ? (setGenres(data.Genre)) : setGenres('N/A')
+            data.totalSeasons !== undefined ? (setSeasons(data.totalSeasons)) : setSeasons('N/A')      
+            
+        })
+        .catch((error) => {
             console.log(error);
-        });
-    }, [key, mediaType, movieId, omdbKey, omdbId]);
-    
-    console.log(omdbData)
+        }); 
+    }, [mediaType,tmdbUrl,omdbUrl]);
 
     return (
         <div className="movie-preview">
-            <p className="poster-title">{omdbData.Title}</p>
+            <p className="poster-title">{title}</p>
             <div className="rating">
                 <img 
                 className="movie-info-logo"
@@ -63,7 +72,7 @@ const Preview = (props) => {
                 alt='' 
                 />
                 &nbsp;	
-            {omdbData.imdbRating}{" "}
+                {imdbScore}{" "}
             </div>
             <div className="rating">
                 <img 
@@ -81,16 +90,22 @@ const Preview = (props) => {
                 alt='' 
                 />
                 &nbsp; 
-                {omdbData.Metascore}{" "}	 
+                {metaScore}{" "}	 
             </div>
             <div>
-                Released:&nbsp;  {omdbData?.Released}{" "}
+                Released:&nbsp;  {date}{" "}
             </div>
-            <div>
-                Runtime:&nbsp;  {omdbData?.Runtime} 
-            </div>
+            {mediaType === 'movie' ? (
+                <div>
+                Runtime:&nbsp;  {runtime} 
+                </div>
+            ) : (
+                <div>
+                Total Seasons:&nbsp; {seasons}
+                </div>    
+            )}
             <div className="preview-genres">
-                Genres:&nbsp; {omdbData?.Genre}
+                Genres:&nbsp; {genres}
             </div>
         </div>
     );

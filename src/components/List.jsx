@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { AiFillForward, AiFillBackward } from "react-icons/ai";
-import axios from "axios";
 
 import Movie from "./Movie";
 
 const List = ({ mediaType, fetchURL }) => {
+
+  
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    axios.get(fetchURL + page)
-    .then((response) => {
-        setMovies(response.data.results);
-      })
+    fetch(fetchURL + page)
+    .then((response) => response.json())
+    .then((data) => setMovies(data.results))
     .catch((error) => {
       console.log(error);
     });
   }, [page, fetchURL]);
+
+  console.log(movies)
 
   return (
     <div>

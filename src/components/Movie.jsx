@@ -20,7 +20,7 @@ const Movie = (props) => {
         onClick={handleClick}
       />
       <div onClick={handleClick} className="movie-poster-cover">
-        <Preview mediaType={props?.mediaType} item={props.item}></Preview>
+        <Preview mediaType={props?.mediaType} id={props?.item.id} ></Preview>
       </div>
     </div>
     ) : (
@@ -32,7 +32,7 @@ const Movie = (props) => {
         alt=""
       />
       <div onClick={handleClick} className="movie-poster-cover">
-        <Preview mediaType={props?.mediaType} item={props.item}></Preview>
+        <Preview mediaType={props?.mediaType} id={props?.item.id} ></Preview>
       </div>
     </div>
     )}
