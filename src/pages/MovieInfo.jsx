@@ -30,7 +30,6 @@ const MovieInfo = () => {
   const [type, setType] = useState('')
 
   const tmdbUrl = `https://api.themoviedb.org/3/${mediaType}/${movieId}/external_ids?api_key=${key}`;
-  const omdbUrl = `https://www.omdbapi.com/?apikey=${omdbKey}&type=${type}&i=${omdbId}`;
   const tmdbInfoUrl = `https://api.themoviedb.org/3/${mediaType}/${movieId}?api_key=${key}&append_to_response=videos`;
   const {user} = UserAuth();
 
@@ -52,7 +51,6 @@ const MovieInfo = () => {
   }, [tmdbInfoUrl]);
 
   useEffect(() => {   
-    mediaType === 'tv' ? setType('series') : setType(mediaType);
     fetch(tmdbUrl)
     .then((response) => response.json())
     .then((data) => {
@@ -64,28 +62,34 @@ const MovieInfo = () => {
     
   }, [mediaType,tmdbUrl,omdbId]);
 
-  console.log(omdbId)
-
-  useEffect(() => {     
-    fetch(omdbUrl)
+  useEffect(() => {   
+    mediaType === 'tv' ? setType('series') : setType(mediaType);
+    fetch(tmdbUrl)
     .then((response) => response.json())
-    .then((data) => {  
-      setOmdbData(data)   
-      if(data.Ratings !== undefined) {
-          let tomato = data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
-          if(tomato === undefined) { 
-              setTomatoScore('N/A')  
-          }else{
-              setTomatoScore(tomato.Value)
-          }
-      }
+    .then((data) => {
+        fetch(`https://www.omdbapi.com/?apikey=${omdbKey}&type=${type}&i=${data.imdb_id}`)
+        .then((response) => response.json())
+        .then((data) => {     
+        console.log(data)
+        setOmdbData(data)
+        if(data.Ratings !== undefined) {
+            let tomato = data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
+            if(tomato === undefined) { 
+                setTomatoScore('N/A')  
+            }else{
+                setTomatoScore(tomato.Value)
+            }
+        }
+        })
+        .catch((error) => {
+            console.log(error);
+        });          
     })
     .catch((error) => {
         console.log(error);
-    }); 
-  }, [omdbUrl]);
-
-  console.log(omdbData)
+    })        
+    
+}, [mediaType,tmdbUrl,omdbKey,type]);
 
   useEffect(() => {
     onSnapshot(doc(db,'users',`${user?.email}`),(doc)=>{
