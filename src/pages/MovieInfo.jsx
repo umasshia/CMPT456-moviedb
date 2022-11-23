@@ -6,6 +6,7 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 
 import Navbar from "../components/Navbar";
+import SimilarList from "../components/SimilarList";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
 import { arrayUnion,doc,updateDoc,onSnapshot } from "firebase/firestore"; 
@@ -19,7 +20,9 @@ const MovieInfo = () => {
   const movieId = params.movieId;
   const mediaType = params.mediaType;
 
-  const [omdbId, setOmdbId] = useState('');
+  console.log(params.movieId)
+  console.log(params.mediaType)
+
   const [omdbData, setOmdbData] = useState([]);
   const [tmdbData, setTmdbData] = useState([]);
   const [tomatoScore, setTomatoScore] = useState('');
@@ -29,14 +32,13 @@ const MovieInfo = () => {
   const [like, setLike] = useState(false);
   const [type, setType] = useState('')
 
-  const tmdbUrl = `https://api.themoviedb.org/3/${mediaType}/${movieId}/external_ids?api_key=${key}`;
-  const tmdbInfoUrl = `https://api.themoviedb.org/3/${mediaType}/${movieId}?api_key=${key}&append_to_response=videos`;
+  const tmdbSimilarUrl = `https://api.themoviedb.org/3/${params.mediaType}/${params.movieId}/similar?api_key=${key}&language=en-US&page=1`;
   const {user} = UserAuth();
 
   const movieID = doc(db, 'users', `${user?.email}`);
 
   useEffect(() => {
-    fetch(tmdbInfoUrl)
+    fetch(`https://api.themoviedb.org/3/${params.mediaType}/${params.movieId}?api_key=${key}&append_to_response=videos`)
     .then((response) => response.json())
     .then((data) => { 
       setTmdbData(data);
@@ -48,23 +50,11 @@ const MovieInfo = () => {
     .catch((error) => {
       console.log(error);
     })
-  }, [tmdbInfoUrl]);
+  }, [key, params.mediaType, params.movieId]);
 
   useEffect(() => {   
-    fetch(tmdbUrl)
-    .then((response) => response.json())
-    .then((data) => {
-        setOmdbId(data.imdb_id)
-    })
-    .catch((error) => {
-        console.log(error);
-    })        
-    
-  }, [mediaType,tmdbUrl,omdbId]);
-
-  useEffect(() => {   
-    mediaType === 'tv' ? setType('series') : setType(mediaType);
-    fetch(tmdbUrl)
+    params.mediaType === 'tv' ? setType('series') : setType(params.mediaType);
+    fetch(`https://api.themoviedb.org/3/${params.mediaType}/${params.movieId}/external_ids?api_key=${key}`)
     .then((response) => response.json())
     .then((data) => {
         fetch(`https://www.omdbapi.com/?apikey=${omdbKey}&type=${type}&i=${data.imdb_id}`)
@@ -89,7 +79,7 @@ const MovieInfo = () => {
         console.log(error);
     })        
     
-}, [mediaType,tmdbUrl,omdbKey,type]);
+}, [key, params.mediaType, params.movieId, omdbKey, type]);
 
   useEffect(() => {
     onSnapshot(doc(db,'users',`${user?.email}`),(doc)=>{
@@ -267,6 +257,10 @@ const MovieInfo = () => {
           </div>
         </div>
       </div>
+        <div>
+          <p className="might-also-like">You might also like: </p>
+          <SimilarList mediaType={params.mediaType} fetchURL={tmdbSimilarUrl} />
+        </div>
     </div>
     </>
   );

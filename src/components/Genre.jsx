@@ -4,6 +4,7 @@ const Genre = ({ genreSelection,mediaType,handleGenreChange }) => {
 
 	const movieGenres =[
 		{id:'',genre:"Popular"},
+		{id:99999,genre:"Top Rated"},
 		{id:28,genre:"Action"},
 		{id:12,genre:"Adventure"},
 		{id:16,genre:"Animation"},
@@ -26,6 +27,7 @@ const Genre = ({ genreSelection,mediaType,handleGenreChange }) => {
 
 	const tvGenres = [
 		{id:'',genre:"Popular"},
+		{id:99999,genre:"Top Rated"},
 		{id:10759,genre:"Action & Adventure"},
 		{id:16,genre:"Animation"},
 		{id:35,genre:"Comedy"},

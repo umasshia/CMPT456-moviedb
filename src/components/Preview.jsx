@@ -4,18 +4,15 @@ const Preview = (props) => {
     const key = process.env.REACT_APP_TMDB_API_KEY;
     const omdbKey = process.env.REACT_APP_OMDB_API_KEY;
 
-    const movieId = props.id;
-    const mediaType = props.mediaType;
-
     const [tomatoScore, setTomatoScore] = useState([]);
     const [omdbData, setOmdbData] = useState([]);
 
     const [type, setType] = useState('movie')
 
-    const tmdbUrl = `https://api.themoviedb.org/3/${mediaType}/${movieId}/external_ids?api_key=${key}`;
+    const tmdbUrl = `https://api.themoviedb.org/3/${props.mediaType}/${props.id}/external_ids?api_key=${key}`;
 
     useEffect(() => {   
-        mediaType === 'tv' ? setType('series') : setType(mediaType);
+        props.mediaType === 'tv' ? setType('series') : setType(props.mediaType);
         fetch(tmdbUrl)
         .then((response) => response.json())
         .then((data) => {
@@ -40,8 +37,8 @@ const Preview = (props) => {
         .catch((error) => {
             console.log(error);
         })        
-        
-    }, [mediaType,tmdbUrl,omdbKey,type]);
+    }, [props.mediaType,tmdbUrl,omdbKey,type]);
+
 
     return (
         <div className="movie-preview">
@@ -76,7 +73,7 @@ const Preview = (props) => {
             <div>
                 Released:&nbsp;  {omdbData?.Released}{" "}
             </div>
-            {mediaType === 'movie' ? (
+            {props.mediaType === 'movie' ? (
                 <div>
                 Runtime:&nbsp;  {omdbData?.Runtime} 
                 </div>

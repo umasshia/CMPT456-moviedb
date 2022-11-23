@@ -30,6 +30,8 @@ const SavedMovies = () => {
       }
     }
 
+    console.log(movies)
+
   return (
     <div>
       <div className= "list-wrap">
@@ -51,7 +53,7 @@ const SavedMovies = () => {
                 </div>
                 <div className="movie-poster-cover">
                 <div className="poster-title-container">
-                    <Preview mediaType={item.type} item={item}></Preview>
+                    <Preview mediaType={item.type} id={item.id}></Preview>
               </div>
               </div>
               </div>

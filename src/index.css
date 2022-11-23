@@ -511,6 +511,25 @@ br {
   width: 100px;
 }
 
+.might-also-like{
+  font-size: xx-large;
+  text-align: center;
+}
+
+.movie-similar-container {
+  display: flex;
+  margin: 200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow-x: scroll;
+}
+
+.movie-similar-list {
+  display: flex; 
+  flex-direction: row;
+  gap: 20px; 
+}
+
 @media (min-width: 300px) { 
   .moviedb {
     font-size: 32px;
