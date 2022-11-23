@@ -530,7 +530,175 @@ br {
   gap: 20px; 
 }
 
-@media (min-width: 300px) { 
+@media (max-width: 420px) {
+  .navbar {
+    font-size: small;
+    overflow: scroll;
+    padding: 8 px;
+    gap: 10px;
+  }
+  .moviedb {
+    font-size: 18px;
+  }
+  .searchbox {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-right: 12px;
+  }
+  .genre-list {
+    font-size: small;
+    padding: 10px
+  }
+  .movie-list{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .movie-container {
+    width: 140px;
+  }
+  .poster-title {
+    font-size: x-small;
+    margin: 5px;
+  }
+  .movie-info-logo {
+    width: 10px;
+    height: 10px;
+  }
+  .movie-preview {
+    font-size: xx-small;
+    gap: 5px;
+  }
+  .page-btn {
+    font-size: x-small;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 10px;
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+  .curr-page-btn {
+    font-size: x-small;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 10px;
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+  .about-btn {
+    font-size: x-small;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .reg-btn{
+    font-size: x-small;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .selected-btn{
+    font-size: x-small;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .clear-btn {
+    font-size: x-small;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .watchlist-header {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  .movie-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+    padding: 0;
+  }
+  
+  .movie-info-title {
+    font-size: 24px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .movie-info-poster {
+    height: 100%;
+    width: 70%;
+    max-width: 200px;
+  }
+  
+  .movie-info-text {
+    font-size: small;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .movie-info-stats {
+    gap: 32px;
+  }
+  
+  .movie-info-ratings {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 10px;
+  }
+  
+  .rating {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+  }
+  
+  .movie-info-logo {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .movie-info-general {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .movie-info-summary {
+    width: 90%;
+  }
+  .might-also-like{
+    font-size: 24px;
+    margin-top: 20px;
+  }
+  
+  .movie-similar-container {
+    display: flex;
+    margin: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .movie-similar-list {
+    display: flex; 
+    flex-direction: row;
+    gap: 10px; 
+  }
+}
+
+@media (min-width: 640px) { 
   .moviedb {
     font-size: 32px;
   }
