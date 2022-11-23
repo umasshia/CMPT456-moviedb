@@ -230,7 +230,7 @@ const MovieInfo = () => {
                 </div>    
               )}
               <div>
-                Genres:&nbsp; {omdbData?.Genres}
+                Genres:&nbsp; {omdbData?.Genre}
               </div>
             </div>
           </div>
