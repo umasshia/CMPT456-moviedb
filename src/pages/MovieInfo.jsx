@@ -4,6 +4,7 @@ import { IoMdPlay } from "react-icons/io";
 import Youtube from "react-youtube";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+import ReactStars from "react-rating-stars-component";
 
 import Navbar from "../components/Navbar";
 import SimilarList from "../components/SimilarList";
@@ -20,15 +21,14 @@ const MovieInfo = () => {
   const movieId = params.movieId;
   const mediaType = params.mediaType;
 
-  console.log(params.movieId)
-  console.log(params.mediaType)
-
   const [omdbData, setOmdbData] = useState([]);
   const [tmdbData, setTmdbData] = useState([]);
   const [tomatoScore, setTomatoScore] = useState('');
   const [trailer, setTrailer] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [saved, setSaved] = useState([]);
+  const [rated, setRated] = useState(false);
+  const [rating, setRating] = useState();
   const [like, setLike] = useState(false);
   const [type, setType] = useState('')
 
@@ -60,7 +60,6 @@ const MovieInfo = () => {
         fetch(`https://www.omdbapi.com/?apikey=${omdbKey}&type=${type}&i=${data.imdb_id}`)
         .then((response) => response.json())
         .then((data) => {     
-        console.log(data)
         setOmdbData(data)
         if(data.Ratings !== undefined) {
             let tomato = data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");
@@ -84,11 +83,12 @@ const MovieInfo = () => {
   useEffect(() => {
     onSnapshot(doc(db,'users',`${user?.email}`),(doc)=>{
       setSaved(doc.data()?.savedMovies)
-      for(var i = 0; i < doc.data()?.savedMovies.length; i++){
-        if(doc.data()?.savedMovies[i].id === tmdbData.id){
-          setLike(true) 
-        }
-      }
+      //eslint-disable-next-line
+      const result = doc.data()?.savedMovies.filter((item)=> item.id == movieId)
+      result === undefined ? setLike(false) : (result.length === 0 ? setLike(false) : setLike(true))
+      //eslint-disable-next-line
+      const ratedResult = doc.data()?.ratedMovies.filter((item)=> toString(item.id) != movieId)
+      setRated(ratedResult[0])
     });
   }, [movieId, user?.email,tmdbData.id,tomatoScore]);
 
@@ -123,6 +123,20 @@ const MovieInfo = () => {
       alert ("You have to be logged in to save movies!")
     }
   }
+
+  const ratingChanged = (newRating) => {
+    console.log(newRating);
+    if (user?.email){
+      updateDoc(movieID,{
+        ratedMovies:arrayUnion({
+          id: tmdbData.id,
+          rating: newRating
+        })
+      })
+    }
+  };
+
+  console.log(rated.rating)
 
   return (
     <>

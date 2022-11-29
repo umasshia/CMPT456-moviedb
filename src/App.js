@@ -9,11 +9,12 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MovieInfo from "./pages/MovieInfo";
 import About from "./pages/About";
+import Search from "./components/Search";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div>
-      <AuthContextProvider>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/logIn" element={<Login />}></Route>
@@ -29,7 +30,6 @@ function App() {
           ></Route>
           <Route path="/about" element={<About />}></Route>
         </Routes>
-      </AuthContextProvider>
     </div>
   );
 }

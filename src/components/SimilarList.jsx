@@ -16,8 +16,6 @@ const SimilarList = ({ mediaType, fetchURL }) => {
     });
     }, [fetchURL]);
 
-    console.log(fetchURL)
-
     return (
     <div>
         <div className="movie-similar-container">
