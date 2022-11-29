@@ -19,7 +19,8 @@ const List = ({ mediaType, fetchURL }) => {
   }, [page, fetchURL]);
 
   return (
-    <div>
+    <div 
+    data-testid="list">
       <div className="list-wrap">
         <div className='movie-list'>
           {movies.map((item) => {

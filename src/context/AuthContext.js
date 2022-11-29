@@ -3,16 +3,17 @@ import {createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuth
 import {auth,db} from "../Firebase.js"
 import {setDoc,doc} from "firebase/firestore"
 
-const AuthContext = createContext();
+const AuthContext = createContext({});
 
 export function AuthContextProvider ({children}){
     const [user,setUser]= useState({})
 
     function signUp(email,password){
-         createUserWithEmailAndPassword(auth,email,password)
-         setDoc(doc(db,'users',email),{
-             savedMovies: []
-         }) 
+        createUserWithEmailAndPassword(auth,email,password)
+        setDoc(doc(db,'users',email),{
+            savedMovies: [],
+            ratedMovies: []
+        }) 
     }
 
     function logIn (email,password){
