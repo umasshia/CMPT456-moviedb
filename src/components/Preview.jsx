@@ -19,7 +19,6 @@ const Preview = (props) => {
             fetch(`https://www.omdbapi.com/?apikey=${omdbKey}&type=${type}&i=${data.imdb_id}`)
             .then((response) => response.json())
             .then((data) => {     
-            console.log(data)
             setOmdbData(data)
             if(data.Ratings !== undefined) {
                 let tomato = data.Ratings.find(({ Source }) => Source === "Rotten Tomatoes");

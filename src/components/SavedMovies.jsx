@@ -30,8 +30,6 @@ const SavedMovies = () => {
       }
     }
 
-    console.log(movies)
-
   return (
     <div>
       <div className= "list-wrap">
