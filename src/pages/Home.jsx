@@ -25,6 +25,7 @@ const Home = () => {
   
   const handleMediaType = (e) => {
     setMediaType(e.target.id);
+    setGenre()
     setUrl(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${key}&with_genres=${genre}&page=`);
   }
 
